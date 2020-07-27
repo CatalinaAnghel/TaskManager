@@ -1,0 +1,52 @@
+#email_field, 
+#password_field,
+#repeat_password_field,
+#last_name_field,
+#first_name_field{
+    margin-top: 5%;
+    display: none;
+}
+
+form{
+    margin-left: 15%;
+}
+.fields{  
+    margin-top: 10px;
+}
+.fields p{
+    float: left;
+    margin-left: 0px;
+    margin-right: 60%;
+}
+    
+.fields #button_show_email,
+#button_show_password,
+#button_show_last_name,
+#button_show_first_name,
+#button_show_username,
+#button_show_phone_number {
+        float: right;
+}
+
+
+#button-form{
+    margin-top: 10%;
+    width: 100%;
+}
+
+form label{
+    margin-left: 5%;
+}
+
+form input{
+    margin-right: 10%;
+    width: 70%;
+    margin-left: 20%;
+}
+nav{
+    height: 50px;
+}
+
+.edit-form{
+    margin-top: 10%;
+}

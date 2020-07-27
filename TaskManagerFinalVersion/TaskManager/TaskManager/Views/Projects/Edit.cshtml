@@ -1,0 +1,79 @@
+﻿@model TaskManager.Models.Projects
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+}
+
+<script src="~/js/ajax.js" type="application/javascript"></script>
+<link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
+
+<h2 style="text-align: center; margin-top: 50px;">Update a project</h2>
+<hr />
+<div class="row justify-content-center" id="form-row">
+    <div class="col-8">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProjectsId" class="control-label">Project</label>
+                <select id="selected-project" onchange="get_project_details()" asp-for="ProjectsId" class="form-control" asp-items="ViewBag.ProjectsId">
+                    <option selected="selected">
+                        Choose a project
+                    </option>
+                </select>
+            </div>
+            <input type="hidden" asp-for="ProjectsId" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" id="name-field" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label">Start date</label>
+                <input asp-for="StartDate" id="start-date-field" class="form-control" type="date" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label">End date</label>
+                <input asp-for="EndDate" id="end-date-field" class="form-control" type="date" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" id="description-field" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WorkedHours" class="control-label">Worked hours</label>
+                <input asp-for="WorkedHours" id="worked-hours-field" class="form-control" type="number" step="any" />
+                <span asp-validation-for="WorkedHours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Difficulty" class="control-label">Difficulty</label>
+                <select asp-for="Difficulty" class="form-control" id="project_difficulty" required>
+                    <option>Easy</option>
+                    <option>Intermediate</option>
+                    <option>Hard</option>
+                </select>
+                <span asp-validation-for="Difficulty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Link" class="control-label"></label>
+                <input asp-for="Link" id="link-field" class="form-control" />
+                <span asp-validation-for="Link" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Importance" class="control-label">Difficulty</label>
+                <select asp-for="Importance" class="form-control" id="importance-field" required>
+                    <option>Low</option>
+                    <option>Medium</option>
+                    <option>High</option>
+                </select>
+                <span asp-validation-for="Importance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update project" class="btn btn-primary" id="submit-button"  />
+            </div>
+        </form>
+    </div>
+</div>

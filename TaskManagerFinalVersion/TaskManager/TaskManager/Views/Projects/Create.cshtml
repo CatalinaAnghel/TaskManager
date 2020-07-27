@@ -1,0 +1,75 @@
+﻿@model TaskManager.Models.Projects
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
+<h2 style="text-align: center; margin-top: 50px;">Add a project</h2>
+<hr />
+<div class="row justify-content-center" id="form-row">
+    <div class="col-8">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name</label>
+                <input asp-for="Name" class="form-control" type="text" required/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label">Start date</label>
+                <input asp-for="StartDate" class="form-control" type="date" required/>
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label">End date</label>
+                <input asp-for="EndDate" class="form-control" type="date" required/>
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Description</label>
+                <input asp-for="Description" class="form-control" required/>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WorkedHours" class="control-label">Worked hours</label>
+                <input asp-for="WorkedHours" class="form-control" type="number" step="any"/>
+                <span asp-validation-for="WorkedHours" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Difficulty" class="control-label">Difficulty</label>
+                <select asp-for="Difficulty" class="form-control" id="project_difficulty" required>
+                    <option>Easy</option>
+                    <option>Intermediate</option>
+                    <option>Hard</option>
+                </select>
+                <span asp-validation-for="Difficulty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Link" class="control-label">Link</label>
+                <input asp-for="Link" class="form-control" required/>
+                <span asp-validation-for="Link" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Importance" class="control-label">Importance</label>
+                <select asp-for="Importance" class="form-control" id="project_importance" required>
+                    <option>Low</option>
+                    <option>Medium</option>
+                    <option>High</option>
+                </select>
+                <span asp-validation-for="Importance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add project" class="btn btn-primary" id="submit-button" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

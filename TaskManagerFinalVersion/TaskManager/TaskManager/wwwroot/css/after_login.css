@@ -1,0 +1,138 @@
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-image: url('../images/green-succulent-plants-on-pots-1470171.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+nav img {
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+}
+
+nav {
+    height: 55px;
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+}
+
+
+
+.alert-error {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    margin-left: -25%;
+}
+
+.jumbotron, .about-info {
+    background-color: white;
+    margin-top: 10%;
+    opacity: 0.6;
+    color: rgb(15, 64, 2);
+}
+
+#table-container{
+    margin-left: 10%;
+    margin-right: 5%;
+    width: 80%;
+    height: 80%;
+    margin-top: 10px;
+   
+    margin-top: 10%;
+}
+
+.container-body-content {
+    text-align: center;
+    color: rgb(15, 64, 2);
+    margin-bottom: 0px;
+    height: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 20%;
+}
+
+.form-container{
+    width: 50%;
+    margin: auto;
+    background-color: transparent;
+    margin-bottom: 10%;
+}
+
+h3{
+    margin-top: 10%;
+    text-align: center;
+}
+
+.form-group{
+    width: 60%;
+    margin: auto;
+
+}
+
+#submit-btn{
+    width: 60%;
+    margin-top: 10px;
+    margin-left: 20%;
+
+}
+
+.radio{
+    margin-left: 20%;
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 200px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    height: 300px;
+    opacity: 0.9;
+    text-align: center;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+p{
+    padding-left: 30px;
+    font-size: larger;
+    margin-top: 10%;
+}
+span {
+    padding-left: 30px;
+}

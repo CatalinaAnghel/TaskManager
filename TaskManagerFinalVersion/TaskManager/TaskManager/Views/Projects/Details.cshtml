@@ -1,0 +1,70 @@
+﻿@model TaskManager.Models.Projects
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+}
+<link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
+
+
+<div>
+    <dl class="row justify-content-center jumbotron">
+        <div class="col-6">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <hr />
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+        </div>
+        <div class="col-6" id="vertical_line">
+            <dt class="col-sm-4">
+                Start date
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+            <dt class="col-sm-4">
+                End date
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+            <dt class="col-sm-4">
+                Worked hours
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.WorkedHours)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Difficulty)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Difficulty)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Link)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Link)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Importance)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Importance)
+            </dd>
+        </div>
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

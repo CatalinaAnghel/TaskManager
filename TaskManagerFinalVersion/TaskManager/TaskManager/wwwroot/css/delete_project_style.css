@@ -1,0 +1,14 @@
+﻿#form-container {
+    margin-top: 10%;
+}
+
+.title{
+    text-align:center;
+}
+
+#submit-button{
+    width: 100%;
+}
+.form-group{
+    font-size: larger;
+}

@@ -1,0 +1,35 @@
+.table{
+    height: 100%;
+    text-align: center;
+}
+
+#info {
+    background-color: rgb(15, 64, 2);
+    color: white;
+    opacity: 0.6;
+    border-radius: 0.7%;
+    height: 100%;
+    width: 102.5%;
+    display: none;
+    font-weight: 600;
+}
+#tasks-button{
+    margin-left: 45%;
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+#info p{
+    margin-top: 5%;
+    margin-left: 5%;
+    padding-bottom: 30px;
+    text-align: justify;
+    font-size: medium;
+}
+
+#description_area {
+    display: block;
+    width: 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

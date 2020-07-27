@@ -1,0 +1,18 @@
+﻿#form-title {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#form-row {
+    margin-top: 50px;
+}
+
+#submit-button{
+    margin-top: 20px;
+    width: 100%;
+    margin-bottom: 10%;
+}
+
+#vertical_line {
+    border-left: solid #0e62e8;
+}

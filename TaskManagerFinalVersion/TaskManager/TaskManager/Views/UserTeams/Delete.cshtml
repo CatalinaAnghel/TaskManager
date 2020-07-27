@@ -1,0 +1,39 @@
+﻿@model TaskManager.Models.UserTeams
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
+<script src="~/js/ajax.js" type="application/javascript"></script>
+
+<h2 style="text-align: center; margin-top: 50px;">Remove a user from a team</h2>
+<hr />
+<div class="row justify-content-center" id="form-row">
+    <div class="col-8">
+        <form asp-action="Delete">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TeamsId" class="control-label">Team:</label>
+                <select asp-for="TeamsId" class="form-control" onchange="get_colleagues()" asp-items="ViewBag.Teams" id="team_field" required>
+                    <option selected="selected">
+                        Choose a team
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsersId" class="control-label">User:</label>
+                <select asp-for="UsersId" class="form-control" id="user_field" asp-items="ViewBag.UsersId" required>
+                    <option selected="selected">
+                        Choose a user
+                    </option>
+                </select>
+            </div>
+            <input type="hidden" asp-for="UsersId" />
+            <div class="form-group">
+                <input type="submit" value="Remove user from team" class="btn btn-primary" id="submit-button" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿@model TaskManager.Models.ProjectTasks
+@{
+    ViewData["Title"] = "AssignTask";
+    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+}
+<script src="~/js/ajax.js" type="application/javascript"></script>
+<link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
+
+<h2 style="text-align: center; margin-top: 50px;">Assign a task to a user</h2>
+<hr />
+<div class="row justify-content-center" id="form-row">
+    <div class="col-8">
+        <form asp-action="Assign">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProjectId" class="control-label">Project</label>
+                <select asp-for="ProjectId" id="select-project" onchange="get_tasks()" class="form-control" asp-items="ViewBag.ProjectsId">
+                    <option selected="selected">
+                        Choose a project
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Task</label>
+                <select id="select_task" asp-for="Name" class="form-control"></select>
+            </div>
+            <input type="hidden" asp-for="Name" />
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label">User</label>
+                <select id="select-user" asp-for="UserId" class="form-control" asp-items="ViewBag.UsersId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary"  id="submit-button" />
+            </div>
+        </form>
+    </div>
+</div>

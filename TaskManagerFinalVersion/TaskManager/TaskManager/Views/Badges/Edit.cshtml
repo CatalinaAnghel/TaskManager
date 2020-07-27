@@ -1,0 +1,40 @@
+﻿@model TaskManager.Models.Badges
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+}
+<script src="~/js/ajax.js" type="application/javascript"></script>
+<link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
+
+<h2 style="text-align: center; margin-top: 50px;">Update a badge</h2>
+<hr />
+<div class="row justify-content-center" id="form-row">
+    <div class="col-8">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BadgesId" class="control-label">Badge:</label>
+                <select id="selected-badge" onchange="get_badge_details()" asp-for="BadgesId" class="form-control" asp-items="ViewBag.BadgesId">
+                    <option selected="selected">
+                        Choose a badge
+                    </option>
+                </select>
+            </div>
+            <input type="hidden" asp-for="BadgesId" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name:</label>
+                <input asp-for="Name" class="form-control" id="name_field" required/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NecessaryScore" class="control-label">Necessary score:</label>
+                <input asp-for="NecessaryScore" class="form-control" id="necessary_score_field" type="number" step="any" required/>
+                <span asp-validation-for="NecessaryScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" id="submit-button" />
+            </div>
+        </form>
+    </div>
+</div>

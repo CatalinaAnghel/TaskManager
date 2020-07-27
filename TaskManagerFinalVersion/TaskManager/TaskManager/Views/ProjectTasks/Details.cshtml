@@ -1,0 +1,65 @@
+﻿@model TaskManager.Models.ProjectTasks
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+}
+<link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
+
+<div>
+    <dl class="row justify-content-center jumbotron">
+        <div class="col-6">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+        </div>
+        <div class="col-6" id="vertical_line">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Importance)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Importance)
+            </dd>
+            <dt class="col-sm-4">
+                Due date
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.DueDate)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Points)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Points)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.User)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.User.UserName)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Project)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Project.Name)
+            </dd>
+        </div>
+    </dl>
+</div>
+
