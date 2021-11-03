@@ -141,7 +141,7 @@ namespace TaskManager.Services
 
         public bool ProjectTasksExists(int id)
         {
-            return ProjectTasksRepository.FindAll().Any(e => e.ProjectId == id); ;
+            return ProjectTasksRepository.FindAll().Any(e => e.ProjectId == id);
         }
 
         public List<ProjectTasks> FindAllByProject(int id)
@@ -179,7 +179,7 @@ namespace TaskManager.Services
         {
             foreach (var task in model.ProjectTasks)
             {
-                if (task.Selected == true)
+                if (task.Selected)
                 {
                     var foundTask = ProjectTasksRepository.FindByCondition(t => t.ProjectTasksId == task.ProjectTasksId);
                     if (foundTask.UserId != null && foundTask.Status.Equals("Done"))

@@ -23,23 +23,18 @@ namespace TaskManager.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        //private readonly UserManager<Users> _userManager;
         private readonly SignInManager<Users> _signInManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly ILoginService _loginService;
-        private readonly ISessionService _sessionService;
 
 
         public LoginModel(SignInManager<Users> signInManager, 
             ILogger<LoginModel> logger,
-            ILoginService loginService,
-            ISessionService sessionService)
+            ILoginService loginService)
         {
-            //_userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _loginService = loginService;
-            _sessionService = sessionService;
         }
 
         [BindProperty]
@@ -89,16 +84,11 @@ namespace TaskManager.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                //var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                
                 // The login service:
                 var result = await _loginService.Login(Input.Email, Input.Password, Input.RememberMe);
                 
                 if (result.Succeeded)
                 {
-                    //_sessionService.InitializeSession(this.HttpContext);
                     int number = 0;
                     HttpContext.Session.SetString("DashboardVisits", JsonConvert.SerializeObject(number));
 

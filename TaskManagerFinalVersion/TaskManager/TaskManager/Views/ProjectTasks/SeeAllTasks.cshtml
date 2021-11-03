@@ -7,38 +7,39 @@
 <link rel="stylesheet" href="~/css/dashboard.css" />
 <div class="row" style="margin-top: 10%; overflow-x:auto;">
     <table class="table col-md-12">
+        <caption>See all the tasks</caption>
         <thead class="thead-dark">
             <tr>
-                <th colspan="9" style="text-align: center; background-color: rgb(15, 64, 2); opacity: 0.6; color: white;">
+                <th scope="col" colspan="9" style="text-align: center; background-color: rgb(15, 64, 2); opacity: 0.6; color: white;">
                     The tasks from the projects you work at
                 </th>
             </tr>
             <tr>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Importance)
                 </th>
-                <th>
+                <th scope="col">
                     Due date
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Status)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Points)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.User)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Project)
                 </th>
-                <th></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody style="background-color: ghostwhite;">

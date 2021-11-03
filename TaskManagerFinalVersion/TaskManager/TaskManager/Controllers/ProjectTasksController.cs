@@ -17,9 +17,9 @@ namespace TaskManager.Controllers
     [Authorize]
     public class ProjectTasksController : Controller
     {
-        private IProjectTasksService _taskService;
-        private IProjectsService _projectsService;
-        private IUsersService _usersService;
+        private readonly IProjectTasksService _taskService;
+        private readonly IProjectsService _projectsService;
+        private readonly IUsersService _usersService;
 
         public ProjectTasksController(IProjectTasksService service,
                                       IProjectsService projectsService,
@@ -77,7 +77,7 @@ namespace TaskManager.Controllers
         }
 
         [HttpPost, ActionName("DeleteProjectTasks")]
-        public async Task<IActionResult> DeleteProjectTasks(TasksViewModel model)
+        public IActionResult DeleteProjectTasks(TasksViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,6 @@ namespace TaskManager.Controllers
         [HttpGet]
         public IActionResult GetTasks(int id)
         {
-            //var tasks = _repoWrapper.ProjectTasks.FindAllByProject(id);
             return Json(_taskService.FindAllByProject(id));
         }
 
@@ -124,8 +123,6 @@ namespace TaskManager.Controllers
         }
 
         // POST: ProjectTasks/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProjectTasksId,Name,Description,Importance,DueDate,Status,ProjectId,Points")] ProjectTasks projectTasks)
@@ -148,7 +145,6 @@ namespace TaskManager.Controllers
         // GET: ProjectTasks/Edit/5
         public async Task<IActionResult> Edit()
         {
-            //var user = await GetCurrentUserAsync();
             var user = await _usersService.GetCurrentUser(HttpContext.User);
 
             var projectTasks = _taskService.FindAllByUserIdOrPM(user.Id);
@@ -162,8 +158,6 @@ namespace TaskManager.Controllers
         }
 
         // POST: ProjectTasks/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit([Bind("ProjectTasksId,Name,Description,Importance,DueDate,Status,UserId,ProjectId,Points")] ProjectTasks projectTasks)
@@ -199,39 +193,5 @@ namespace TaskManager.Controllers
             Console.WriteLine("\n" + task + " \n");
             return Json(task);
         }
-
-        //// GET: ProjectTasks/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var projectTasks = _repoWrapper.ProjectTasks.FindByCondition(t => t.ProjectTasksId == id);
-        //    if (projectTasks == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(projectTasks);
-        //}
-
-        //// POST: ProjectTasks/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var projectTasks = _repoWrapper.ProjectTasks.FindByCondition(t => t.ProjectTasksId == id);
-        //    _repoWrapper.ProjectTasks.Delete(projectTasks);
-        //    _repoWrapper.Save();
-        //    return RedirectToAction(nameof(Index));
-        //}
-
-        //private bool ProjectTasksExists(int id)
-        //{
-        //    bool found = _repoWrapper.ProjectTasks.ProjectTasksExists(id);
-        //    return found;
-        //}
     }
 }

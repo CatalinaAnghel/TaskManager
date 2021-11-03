@@ -23,29 +23,10 @@ namespace TaskManager.Controllers
         }
 
         // GET: Badges
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View(_badgesService.FindAllBadges().OrderBy(b => b.NecessaryScore));
         }
-
-        //// GET: Badges/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    //var badges = await _context.Badges
-        //    //    .FirstOrDefaultAsync(m => m.BadgesId == id);
-        //    var badges = _badgesService.FindBadgesByCondition(b => b.BadgesId == id);
-        //    if (badges == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(badges);
-        //}
 
         // GET: Badges/Create
         public IActionResult Create()
@@ -54,8 +35,6 @@ namespace TaskManager.Controllers
         }
 
         // POST: Badges/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("BadgesId,Name,NecessaryScore")] Badges badges)
@@ -77,11 +56,9 @@ namespace TaskManager.Controllers
         }
 
         // POST: Badges/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind("BadgesId,Name,NecessaryScore")] Badges badge)
+        public IActionResult Edit([Bind("BadgesId,Name,NecessaryScore")] Badges badge)
         {
             if (ModelState.IsValid)
             {

@@ -17,7 +17,7 @@ namespace TaskManager.Interfaces.Repositories
         public int GetNumberOfUnfinishedTasks(string userId);
         public ProjectTasks FindProjectTaskByCondition(Expression<Func<ProjectTasks, bool>> expression);
         public TasksViewModel GetTaskViewModel(string userId);
-        public List<ProjectTasks> FindAllByUserIdOrPM(string userid);
+        public List<ProjectTasks> FindAllByUserIdOrPM(string userId);
         public List<ProjectTasks> FindAll(Users user);
     }
 }

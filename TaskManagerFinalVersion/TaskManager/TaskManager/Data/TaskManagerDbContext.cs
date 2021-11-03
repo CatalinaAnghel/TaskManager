@@ -15,8 +15,8 @@ namespace TaskManager.Data
         {
         }
 
-        public DbSet<Users> Users { get; set; }
-        public DbSet<Roles> Roles { get; set; }
+        public override DbSet<Users> Users { get; set; }
+        public override DbSet<Roles> Roles { get; set; }
         public DbSet<UserRoles> UserRoles { get; set; }
         public DbSet<Projects> Projects { get; set; }
         public DbSet<ProjectTasks> ProjectTasks { get; set; }

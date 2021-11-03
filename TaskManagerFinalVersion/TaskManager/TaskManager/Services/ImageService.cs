@@ -11,11 +11,8 @@ namespace TaskManager.Services
 {
     public class ImageService : IImageService
     {
-        //private readonly IUsersService _usersService;
-
         public ImageService()
         {
-            //_usersService = usersService;
         }
 
 
@@ -35,9 +32,8 @@ namespace TaskManager.Services
             }
         }
 
-        public async Task<string> GetProfileImage(Users user)
+        public string GetProfileImage(Users user)
         {
-            //var user = await _usersService.GetCurrentUser(httpContext.User);
             var image = user.ProfileImage;
             try
             {

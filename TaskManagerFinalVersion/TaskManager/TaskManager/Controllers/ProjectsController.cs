@@ -20,8 +20,8 @@ namespace TaskManager.Controllers
     [Authorize(Roles="Administrator, User")]
     public class ProjectsController : Controller
     {
-        private IProjectsService _projectsService;
-        private IProjectTasksService _tasksService;
+        private readonly IProjectsService _projectsService;
+        private readonly IProjectTasksService _tasksService;
         private readonly IUsersService _usersService;
 
         public ProjectsController(IProjectsService projectsService,
@@ -50,7 +50,7 @@ namespace TaskManager.Controllers
         }
 
         // GET: Projects/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -73,11 +73,9 @@ namespace TaskManager.Controllers
         }
 
         // POST: Projects/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProjectsId,Name,StartDate,EndDate,Description,WorkedHours,Difficulty,Link,Importance")] Projects projects)
+        public IActionResult Create([Bind("ProjectsId,Name,StartDate,EndDate,Description,WorkedHours,Difficulty,Link,Importance")] Projects projects)
         {
             if (ModelState.IsValid)
             {
@@ -104,8 +102,6 @@ namespace TaskManager.Controllers
         }
 
         // POST: Projects/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([Bind("ProjectsId,Name,StartDate,EndDate,Description,WorkedHours,Difficulty,Link,Importance")] Projects projects)
@@ -155,38 +151,5 @@ namespace TaskManager.Controllers
             }
             return RedirectToAction("Index", "Projects");
         }
-
-
-        //// GET: Projects/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    //var projects = _repoWrapper.Projects.FindByCondition(p => p.ProjectsId == id);
-        //    var projects = _projectsService.FindByCondition(project => project.ProjectsId == id);
-        //    if (projects == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(projects);
-        //}
-
-        //// POST: Projects/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    //var projects = _repoWrapper.Projects.FindByCondition(p => p.ProjectsId == id);
-        //    //_repoWrapper.Projects.Delete(projects);
-        //    //_repoWrapper.Save();
-        //    //_projectsService.DeleteProject(_projectsService.FindByCondition(p => p.ProjectsId == id));
-
-        //    return RedirectToAction(nameof(Index));
-        //}
     }
 }

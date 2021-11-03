@@ -13,7 +13,7 @@ namespace TaskManager.Repositories
     {
         protected TaskManagerDbContext RepositoryContext { get; set; }
 
-        public RepositoryBase(TaskManagerDbContext repositoryContext)
+        protected RepositoryBase(TaskManagerDbContext repositoryContext)
         {
             this.RepositoryContext = repositoryContext;
         }

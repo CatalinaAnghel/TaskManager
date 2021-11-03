@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.WebUtilities;
 using TaskManager.Models;
 using Microsoft.AspNetCore.Identity;
 
@@ -14,12 +11,10 @@ namespace TaskManager.Areas.Identity.Pages.Account
     public class RegisterConfirmationModel : PageModel
     {
         private readonly UserManager<Users> _userManager;
-        //private readonly IEmailSender _sender;
 
         public RegisterConfirmationModel(UserManager<Users> userManager)
         {
             _userManager = userManager;
-            //_sender = sender;
         }
 
         public string Email { get; set; }
@@ -42,19 +37,6 @@ namespace TaskManager.Areas.Identity.Pages.Account
             }
 
             Email = email;
-            // Once you add a real email sender, you should remove this code that lets you confirm the account
-            //DisplayConfirmAccountLink = true;
-            //if (DisplayConfirmAccountLink)
-            //{
-            //    var userId = await _userManager.GetUserIdAsync(user);
-            //    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            //    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            //    EmailConfirmationUrl = Url.Page(
-            //        "/Account/ConfirmEmail",
-            //        pageHandler: null,
-            //        values: new { area = "Identity", userId = userId, code = code },
-            //        protocol: Request.Scheme);
-            //}
 
             return Page();
         }

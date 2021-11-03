@@ -38,8 +38,6 @@ namespace TaskManager.Controllers
         }
 
         // POST: UserTeams/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UserTeamsId,UsersId,TeamsId,Job")] UserTeams userTeams)
@@ -55,7 +53,13 @@ namespace TaskManager.Controllers
             return View(userTeams);
         }
 
-     
+        public async Task<IActionResult> FindColleagues(int id)
+        {
+            var user = await _usersService.GetCurrentUser(HttpContext.User);
+
+            var users = _userTeamsService.GetTeamColleagues(id, user);
+            return Json(users);
+        }
 
         // GET: UserTeams/Delete/5
         public async Task<IActionResult> Delete()
@@ -65,14 +69,6 @@ namespace TaskManager.Controllers
             
             ViewData["Teams"] = new SelectList(teams, "TeamsId", "Name");
             return View();
-        }
-
-        public async Task<IActionResult> FindColleagues(int id)
-        {
-            var user = await _usersService.GetCurrentUser(HttpContext.User);
-
-            var users = _userTeamsService.GetTeamColleagues(id, user);
-            return Json(users);
         }
 
         // POST: UserTeams/Delete/5
@@ -90,10 +86,5 @@ namespace TaskManager.Controllers
             ViewData["Teams"] = new SelectList(teams, "TeamsId", "Name");
             return View();
         }
-
-        //private bool UserTeamsExists(int id)
-        //{
-        //    return _context.UserTeams.Any(e => e.UserTeamsId == id);
-        //}
     }
 }

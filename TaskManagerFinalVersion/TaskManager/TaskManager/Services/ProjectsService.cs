@@ -38,7 +38,7 @@ namespace TaskManager.Services
         {
             foreach (var project in model.Projects)
             {
-                if (project.Selected == true)
+                if (project.Selected)
                 {
                     ProjectsRepository.Delete(project);
                 }

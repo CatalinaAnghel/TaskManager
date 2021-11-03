@@ -7,36 +7,37 @@
 <script src="~/js/show_tasks.js" type="application/javascript"></script>
 <div class="row" style="margin-top: 10%; overflow-x:auto;">
     <table class="table col-md-12">
+        <caption>See your projects</caption>
         <thead class="thead-dark">
             <tr>
-                <th colspan="9" style="text-align: center; background-color: rgb(15, 64, 2); opacity: 0.6; color: white;"> Your projects</th>
+                <th scope="col" colspan="9" style="text-align: center; background-color: rgb(15, 64, 2); opacity: 0.6; color: white;"> Your projects</th>
             </tr>
             <tr>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
-                <th>
+                <th scope="col">
                     Start date
                 </th>
-                <th>
+                <th scope="col">
                     End date
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
-                <th>
+                <th scope="col">
                     Hours
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Difficulty)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Link)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Importance)
                 </th>
-                <th>
+                <th scope="col">
                 </th>
             </tr>
         </thead>

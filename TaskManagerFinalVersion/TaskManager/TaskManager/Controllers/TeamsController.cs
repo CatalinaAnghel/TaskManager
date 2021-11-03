@@ -16,9 +16,9 @@ namespace TaskManager.Controllers
     [Authorize]
     public class TeamsController : Controller
     {
-        private IUsersService _usersService;
-        private IProjectsService _projectsService;
-        private ITeamsService _teamsService;
+        private readonly IUsersService _usersService;
+        private readonly IProjectsService _projectsService;
+        private readonly ITeamsService _teamsService;
         public TeamsController( IProjectsService projectsService,
                                 ITeamsService teamsService,
                                 IUsersService usersService)
@@ -29,13 +29,13 @@ namespace TaskManager.Controllers
         }
 
         // GET: Teams
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View(_teamsService.FindAll());
         }
 
         // GET: Teams/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -60,8 +60,6 @@ namespace TaskManager.Controllers
         }
 
         // POST: Teams/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("TeamsId,Name,ProjectId")] Teams teams)
@@ -77,7 +75,7 @@ namespace TaskManager.Controllers
         }
 
         // GET: Teams/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -94,11 +92,9 @@ namespace TaskManager.Controllers
         }
 
         // POST: Teams/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TeamsId,Name,ProjectId")] Teams teams)
+        public IActionResult Edit(int id, [Bind("TeamsId,Name,ProjectId")] Teams teams)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +102,9 @@ namespace TaskManager.Controllers
                 {
                     _teamsService.UpdateTeam(teams);
                 }
-                catch (DbUpdateConcurrencyException){}
+                catch (DbUpdateConcurrencyException e){
+                    throw new Exception("Concurrency error:", e);
+                }
 
                 return RedirectToAction(nameof(Index));
             }

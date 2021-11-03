@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -17,19 +16,16 @@ namespace TaskManager.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<Users> _userManager;
         private readonly SignInManager<Users> _signInManager;
         private readonly IImageService _imageService;
-        private readonly IUsersService _usersService;
 
 
         public IndexModel(
             UserManager<Users> userManager,
             SignInManager<Users> signInManager,
-            IImageService imageService,
-            IUsersService usersService)
+            IImageService imageService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _imageService = imageService;
-            _usersService = usersService;
         }
 
         public string Username { get; set; }
@@ -100,7 +96,6 @@ namespace TaskManager.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            //_usersService.UpdateUser( Input.FirstName, Input.LastName, Input.PhoneNumber, Input.ProfileImage);
             if (user.FirstName != Input.FirstName)
             {
                 user.FirstName = Input.FirstName;

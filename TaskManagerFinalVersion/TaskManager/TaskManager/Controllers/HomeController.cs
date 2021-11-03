@@ -16,13 +16,11 @@ namespace TaskManager.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IImageService _imageService;
         private readonly IUsersService _usersService;
 
-        public HomeController(ILogger<HomeController> logger, IImageService imageService, IUsersService usersService)
+        public HomeController(IImageService imageService, IUsersService usersService)
         {
-            _logger = logger;
             _imageService = imageService;
             _usersService = usersService;
         }
@@ -56,7 +54,7 @@ namespace TaskManager.Controllers
         public async Task<ActionResult> RetrieveImage()
         {
             var user = await _usersService.GetCurrentUser(HttpContext.User);
-            var imageDataURL = await _imageService.GetProfileImage(user);
+            var imageDataURL = _imageService.GetProfileImage(user);
             
             return Json(imageDataURL);
         }

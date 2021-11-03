@@ -14,14 +14,12 @@ namespace TaskManager.Services
     {
         private readonly UserManager<Users> _userManager;
         private readonly RoleManager<Roles> _roleManager;
-        private readonly IUsersService _usersService;
         private readonly IImageService _imageService;
         
 
-        public SignInService(UserManager<Users> userManager, IUsersService usersService, RoleManager<Roles> roleManager, IImageService imageService)
+        public SignInService(UserManager<Users> userManager, RoleManager<Roles> roleManager, IImageService imageService)
         {
             _userManager = userManager;
-            _usersService = usersService;
             _roleManager = roleManager;
             _imageService = imageService;
         }
