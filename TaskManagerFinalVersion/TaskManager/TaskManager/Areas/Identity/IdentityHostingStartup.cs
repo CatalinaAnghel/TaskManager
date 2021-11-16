@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TaskManager.Data;
-using TaskManager.Models;
+using TaskManager.DataAccess.DataModels;
 
 [assembly: HostingStartup(typeof(TaskManager.Areas.Identity.IdentityHostingStartup))]
 namespace TaskManager.Areas.Identity

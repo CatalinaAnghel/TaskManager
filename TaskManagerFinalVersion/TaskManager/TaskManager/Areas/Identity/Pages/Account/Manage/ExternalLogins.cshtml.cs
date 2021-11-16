@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using TaskManager.Models;
+using TaskManager.DataAccess.DataModels;
 
 namespace TaskManager.Areas.Identity.Pages.Account.Manage
 {

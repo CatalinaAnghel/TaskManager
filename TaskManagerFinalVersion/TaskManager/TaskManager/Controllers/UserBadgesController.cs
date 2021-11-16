@@ -6,9 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using TaskManager.Data;
-using TaskManager.Interfaces.Services;
-using TaskManager.Models;
+using TaskManager.ApplicationLogic.Services.Abstractions;
 
 namespace TaskManager.Controllers
 {

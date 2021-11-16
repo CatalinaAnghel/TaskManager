@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using TaskManager.Interfaces.Services;
+using TaskManager.ApplicationLogic.Services.Abstractions;
 using TaskManager.Models;
 
 namespace TaskManager.Controllers

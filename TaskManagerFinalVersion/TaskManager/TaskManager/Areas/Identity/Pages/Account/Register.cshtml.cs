@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using TaskManager.Interfaces.Services;
-using TaskManager.Models;
+using TaskManager.ApplicationLogic.Services.Abstractions;
+using TaskManager.DataAccess.DataModels;
 
 namespace TaskManager.Areas.Identity.Pages.Account
 {

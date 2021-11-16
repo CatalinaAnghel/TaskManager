@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using TaskManager.Models;
+using TaskManager.DataAccess.DataModels;
 using Microsoft.AspNetCore.Identity;
 
 namespace TaskManager.Areas.Identity.Pages.Account

@@ -10,10 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using TaskManager.Data;
-using TaskManager.Interfaces.Services;
-using TaskManager.Models;
-using TaskManager.ViewModels;
+using TaskManager.ApplicationLogic.Services.Abstractions;
+using TaskManager.DataAccess.DataModels;
+using TaskManager.DataAccess.Dtos;
 
 namespace TaskManager.Controllers
 {

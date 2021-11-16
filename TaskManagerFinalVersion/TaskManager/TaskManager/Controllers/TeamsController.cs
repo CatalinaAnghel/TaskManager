@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using TaskManager.Data;
-using TaskManager.Interfaces.Services;
-using TaskManager.Models;
+using TaskManager.ApplicationLogic.Services.Abstractions;
+using TaskManager.DataAccess.DataModels;
 
 namespace TaskManager.Controllers
 {

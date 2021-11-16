@@ -8,13 +8,13 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using TaskManager.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using TaskManager.Models;
-using TaskManager.Interfaces.Services;
-using TaskManager.Services;
+using TaskManager.ApplicationLogic.Services.Abstractions;
+using TaskManager.DataAccess.Data;
+using TaskManager.DataAccess.DataModels;
+using TaskManager.ApplicationLogic.Services;
 
 namespace TaskManager
 {

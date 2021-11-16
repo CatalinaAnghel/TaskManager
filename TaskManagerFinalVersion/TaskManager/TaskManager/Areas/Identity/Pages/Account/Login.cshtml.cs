@@ -11,12 +11,10 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using TaskManager.Models;
-using TaskManager.Data;
-using TaskManager.Interfaces.Services;
-using TaskManager.Services;
+using TaskManager.DataAccess.DataModels;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using TaskManager.ApplicationLogic.Services.Abstractions;
 
 namespace TaskManager.Areas.Identity.Pages.Account
 {
