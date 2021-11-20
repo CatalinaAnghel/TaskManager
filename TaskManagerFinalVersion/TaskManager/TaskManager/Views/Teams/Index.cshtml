@@ -11,32 +11,34 @@
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
+    <caption>Teams</caption>
     <thead>
         <tr>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Project)
             </th>
-            <th></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Project.ProjectsId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TeamsId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TeamsId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TeamsId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Project.ProjectsId)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TeamsId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.TeamsId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.TeamsId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

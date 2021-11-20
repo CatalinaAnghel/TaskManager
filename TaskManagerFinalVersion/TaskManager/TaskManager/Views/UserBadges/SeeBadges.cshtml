@@ -12,18 +12,19 @@
 <p style="text-align: center;">Your score is: @ViewData["Score"]</p>
 <div class="row" style="margin-top: 10%; overflow-x:auto;">
     <table class="table col-md-12">
+        <caption>Badges</caption>
         <thead class="thead-dark">
             <tr>
-                <th colspan="8" style="text-align: center; background-color: rgb(15, 64, 2); opacity: 0.6; color: white;"> Your badges</th>
+                <th scope="col" colspan="8" style="text-align: center; background-color: rgb(15, 64, 2); opacity: 0.6; color: white;"> Your badges</th>
             </tr>
             <tr>
-                <th>
+                <th scope="col">
                     Id
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Badge.Name)
                 </th>
-                <th>
+                <th scope="col">
                     Score
                 </th>
             </tr>

@@ -1,8 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using TaskManager.DataAccess.Repositories.Abstractions;
 
 namespace TaskManager.DataAccess.UnitOfWork{
-    public interface IUnitOfWork{
+    public interface IUnitOfWork: IDisposable{
         IProjectsRepository ProjectsRepository { get; }
         IProjectTasksRepository ProjectTasksRepository { get; }
         IUsersRepository UsersRepository { get; }

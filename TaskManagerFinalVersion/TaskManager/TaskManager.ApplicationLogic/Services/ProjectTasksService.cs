@@ -156,9 +156,7 @@ namespace TaskManager.ApplicationLogic.Services
         public void AssignTaskToUser(int projectId, string taskName, string userId)
         {
             var task = UnitOfWork.ProjectTasksRepository.FindAll()
-                .Where(t => t.ProjectId == projectId)
-                .Where(t => t.Name == taskName)
-                .SingleOrDefault();
+                .SingleOrDefault(t => t.ProjectId == projectId && t.Name.Equals(taskName));
             task.UserId = userId;
             UpdateTask(task);
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -17,7 +14,7 @@ namespace TaskManager.Controllers
     {
         private readonly IBadgesService _badgesService;
 
-        public BadgesController(TaskManagerDbContext context, IBadgesService badgesService)
+        public BadgesController(IBadgesService badgesService)
         {
             _badgesService = badgesService;
         }
@@ -50,6 +47,7 @@ namespace TaskManager.Controllers
         // GET: Badges/Edit/5
         public IActionResult Edit()
         {
+            // select the badges that can be edited
             ViewData["BadgesId"] = new SelectList(_badgesService.FindAllBadges(), "BadgesId", "Name");
 
             return View();

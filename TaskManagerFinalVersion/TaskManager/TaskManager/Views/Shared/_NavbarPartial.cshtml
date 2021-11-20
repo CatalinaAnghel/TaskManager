@@ -1,7 +1,7 @@
 ﻿@if (User.IsInRole("Administrator") || User.IsInRole("User"))
 {
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3" id="navbar-id">
-        <img src="~/images/logo_transparent.png" width="35" height="35" class="mr-2">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3" aria-label="Navigation bar" id="navbar-id">
+        <img src="~/images/logo_transparent.png" width="35" height="35" class="mr-2" alt="logo image">
         <a class="navbar-brand" asp-area="" asp-controller="Projects" asp-action="Index">Task Manager</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +66,7 @@
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                            data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
-                            <img src="~/images/user_icon.jpg" width="30" height="30" id="user_image_field">
+                            <img src="~/images/user_icon.jpg" width="30" height="30" id="user_image_field" alt="user default image">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" asp-controller="UserBadges" asp-action="SeeBadges">See badges</a>
@@ -84,7 +84,7 @@
 }
 else
 {
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3" aria-label="Navigation bar">
         <img src="~/images/logo_transparent.png" width="35" height="35" class="mr-2" alt="Task Manager logo">
         <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Task Manager</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"

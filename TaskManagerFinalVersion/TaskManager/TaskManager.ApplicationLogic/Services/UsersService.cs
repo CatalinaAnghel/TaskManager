@@ -51,7 +51,7 @@ namespace TaskManager.ApplicationLogic.Services
             }
             
 
-            var result = await _userManager.UpdateAsync(user);
+            await _userManager.UpdateAsync(user);
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (newPhoneNumber != phoneNumber)

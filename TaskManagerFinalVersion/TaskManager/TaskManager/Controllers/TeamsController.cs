@@ -102,7 +102,6 @@ namespace TaskManager.Controllers
                     _teamsService.UpdateTeam(teams);
                 }
                 catch (DbUpdateConcurrencyException e){
-                    throw new Exception("Concurrency error:", e);
                 }
 
                 return RedirectToAction(nameof(Index));
