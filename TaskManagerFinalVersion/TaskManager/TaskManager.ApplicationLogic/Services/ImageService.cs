@@ -11,11 +11,6 @@ namespace TaskManager.ApplicationLogic.Services
 {
     public class ImageService : IImageService
     {
-        public ImageService()
-        {
-        }
-
-
         public async void SetProfileImage(List<IFormFile> profileImage, Users user)
         {
             if (profileImage != null)

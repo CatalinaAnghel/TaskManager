@@ -2,9 +2,11 @@
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section Styling{
     <link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
+}
 
 <h2 style="text-align: center; margin-top: 50px;">Add a project task</h2>
 <hr />
@@ -14,12 +16,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" required/>
+                <input asp-for="Name" class="form-control" required />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" required/>
+                <input asp-for="Description" class="form-control" required />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -42,7 +44,7 @@
                     <option>Not finished</option>
                     <option>Done</option>
                     <option>Abandoned</option>
-                </select>                
+                </select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
 
@@ -52,7 +54,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Points" class="control-label"></label>
-                <input asp-for="Points" class="form-control" type="number" step="any"/>
+                <input asp-for="Points" class="form-control" type="number" step="any" />
                 <span asp-validation-for="Points" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -61,5 +63,3 @@
         </form>
     </div>
 </div>
-
-

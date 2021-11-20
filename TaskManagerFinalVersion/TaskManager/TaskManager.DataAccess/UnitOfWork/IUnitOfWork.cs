@@ -1,10 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
+using TaskManager.DataAccess.Repositories.Abstractions;
 
-namespace TaskManager.DataAccess.UnitOfWork
-{
-    public interface IUnitOfWork
-    {
+namespace TaskManager.DataAccess.UnitOfWork{
+    public interface IUnitOfWork{
+        IProjectsRepository ProjectsRepository { get; }
+        IProjectTasksRepository ProjectTasksRepository { get; }
+        IUsersRepository UsersRepository { get; }
+        IUserBadgesRepository UserBadgesRepository { get; }
+        IUserTeamsRepository UserTeamsRepository { get; }
+        ITeamsRepository TeamsRepository { get; }
+        IBadgesRepository BadgesRepository { get; }
+
+        Task<int> CompleteAsync();
+        int Complete();
+        public void Dispose();
     }
 }

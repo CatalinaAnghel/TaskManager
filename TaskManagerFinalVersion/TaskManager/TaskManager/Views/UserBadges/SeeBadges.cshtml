@@ -2,9 +2,13 @@
 
 @{
     ViewData["Title"] = "SeeBadges";
-    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="~/css/dashboard.css" />
+
+@section Styling{
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+}
+
 <p style="text-align: center;">Your score is: @ViewData["Score"]</p>
 <div class="row" style="margin-top: 10%; overflow-x:auto;">
     <table class="table col-md-12">

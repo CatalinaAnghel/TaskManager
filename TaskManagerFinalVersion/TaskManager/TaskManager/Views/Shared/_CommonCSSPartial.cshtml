@@ -1,0 +1,12 @@
+﻿<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+
+
+@if (User.IsInRole("Administrator") || User.IsInRole("User"))
+{
+    <link rel="stylesheet" href="~/css/after_login.css" />
+}
+else
+{
+    <link rel="stylesheet" href="~/css/home.css" />
+}

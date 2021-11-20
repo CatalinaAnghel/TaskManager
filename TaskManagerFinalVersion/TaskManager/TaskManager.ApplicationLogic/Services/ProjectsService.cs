@@ -3,33 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using TaskManager.DataAccess.DataModels;
-using TaskManager.DataAccess.Dtos;
 using TaskManager.ApplicationLogic.Services.Abstractions;
-using TaskManager.DataAccess.Data;
-using TaskManager.DataAccess.Repositories;
-using TaskManager.DataAccess.Repositories.Abstractions;
+using TaskManager.DataAccess.UnitOfWork;
+using TaskManager.ApplicationLogic.Dtos;
 
 namespace TaskManager.ApplicationLogic.Services
 {
     public class ProjectsService: IProjectsService
     {
-        public IProjectsRepository ProjectsRepository { get; }
+        public IUnitOfWork UnitOfWork { get; }
 
-        public ProjectsService(TaskManagerDbContext context)
+        public ProjectsService(IUnitOfWork unitOfWork)
         {
-            ProjectsRepository = new ProjectsRepository(context);
+            this.UnitOfWork = unitOfWork;
         }
 
         public void AddProject(Projects project)
         {
-            ProjectsRepository.Create(project);
-            ProjectsRepository.Save();
+            UnitOfWork.ProjectsRepository.Create(project);
+            UnitOfWork.ProjectsRepository.Save();
         }
 
         public void UpdateProject(Projects project)
         {
-            ProjectsRepository.Update(project);
-            ProjectsRepository.Save();
+            UnitOfWork.ProjectsRepository.Update(project);
+            UnitOfWork.ProjectsRepository.Save();
 
         }
 
@@ -39,36 +37,36 @@ namespace TaskManager.ApplicationLogic.Services
             {
                 if (project.Selected)
                 {
-                    ProjectsRepository.Delete(project);
+                    UnitOfWork.ProjectsRepository.Delete(project);
                 }
 
             }
-            ProjectsRepository.Save();
+            UnitOfWork.ProjectsRepository.Save();
         }
 
         public List<Projects> FindAll()
         {
-            return ProjectsRepository.FindAll();
+            return UnitOfWork.ProjectsRepository.FindAll();
         }
 
         public Projects FindByCondition(Expression<Func<Projects, bool>> expression)
         {
-            return ProjectsRepository.FindByCondition(expression);
+            return UnitOfWork.ProjectsRepository.FindByCondition(expression);
         }
 
         public List<Projects> FindProjectByUserId(string userId)
         {
-            return ProjectsRepository.FindProjectByUserId(userId);
+            return UnitOfWork.ProjectsRepository.FindProjectByUserId(userId);
         }
 
         public List<Projects> FindProjectByPM(string userId)
         {
-            return ProjectsRepository.FindByPM(userId);
+            return UnitOfWork.ProjectsRepository.FindByPM(userId);
         }
 
         public bool ProjectExists(int id)
         {
-            return ProjectsRepository.FindAll().Any(e => e.ProjectsId == id);
+            return UnitOfWork.ProjectsRepository.FindAll().Any(e => e.ProjectsId == id);
         }
 
         

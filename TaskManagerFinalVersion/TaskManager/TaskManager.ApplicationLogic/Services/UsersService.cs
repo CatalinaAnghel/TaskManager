@@ -8,9 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using TaskManager.ApplicationLogic.Services.Abstractions;
 using TaskManager.DataAccess.DataModels;
-using TaskManager.DataAccess.Data;
-using TaskManager.DataAccess.Repositories;
-using TaskManager.DataAccess.Repositories.Abstractions;
+using TaskManager.DataAccess.UnitOfWork;
 
 namespace TaskManager.ApplicationLogic.Services
 {
@@ -19,18 +17,25 @@ namespace TaskManager.ApplicationLogic.Services
         private readonly UserManager<Users> _userManager;
         private readonly IImageService _imageService;
 
-        private IUsersRepository UsersRepository { get; }
+        private IUnitOfWork UnitOfWork { get; }
 
-        public UsersService( UserManager<Users> userManager, TaskManagerDbContext context, IImageService imageService)
+        public UsersService(
+            UserManager<Users> userManager,
+            IUnitOfWork unitOfWork,
+            IImageService imageService)
         {
             _userManager = userManager;
-            UsersRepository = new UsersRepository(context);
+            UnitOfWork = unitOfWork;
             _imageService = imageService;
         }
 
         // it does not work
-        public async void UpdateUser(Users user, string firstName, string lastName, string newPhoneNumber, List<IFormFile> profileImage)
-        {
+        public async void UpdateUser(Users user, 
+            string firstName, 
+            string lastName, 
+            string newPhoneNumber, 
+            List<IFormFile> profileImage
+            ){
             if (user.FirstName != firstName)
             {
                 user.FirstName = firstName;
@@ -77,7 +82,7 @@ namespace TaskManager.ApplicationLogic.Services
 
         public List<Users> FindColleagues(Users user)
         {
-            return UsersRepository.FindColleagues(user);
+            return UnitOfWork.UsersRepository.FindColleagues(user);
         }
     }
 }

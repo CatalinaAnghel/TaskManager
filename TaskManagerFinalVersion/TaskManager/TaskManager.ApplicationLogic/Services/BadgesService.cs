@@ -1,46 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
-using TaskManager.DataAccess.Repositories.Abstractions;
 using TaskManager.ApplicationLogic.Services.Abstractions;
 using TaskManager.DataAccess.DataModels;
-using TaskManager.DataAccess.Data;
-using TaskManager.DataAccess.Repositories;
+using TaskManager.DataAccess.UnitOfWork;
 
 namespace TaskManager.ApplicationLogic.Services
 {
     public class BadgesService : IBadgesService
     {
-        public IBadgesRepository BadgesRepository { get; set; }
+        public IUnitOfWork UnitOfWork { get; set; }
 
-        public BadgesService(TaskManagerDbContext context)
+        public BadgesService(IUnitOfWork unitOfWork)
         {
-            BadgesRepository = new BadgesRepository(context);
+            this.UnitOfWork = unitOfWork;
         }
 
         public void AddBadge(Badges badge)
         {
-            BadgesRepository.Create(badge);
-            BadgesRepository.Save();
+            UnitOfWork.BadgesRepository.Create(badge);
+            UnitOfWork.BadgesRepository.Save();
         }
 
         public void DeleteBadge(Badges badge)
         {
-            var foundBadge = BadgesRepository.FindByCondition(b => b.BadgesId == badge.BadgesId);
+            var foundBadge = UnitOfWork.BadgesRepository.FindByCondition(b => b.BadgesId == badge.BadgesId);
             if(badge != null)
             {
-                BadgesRepository.Delete(foundBadge);
-                BadgesRepository.Save();
+                UnitOfWork.BadgesRepository.Delete(foundBadge);
+                UnitOfWork.BadgesRepository.Save();
             }
            
         }
 
         public void UpdateBadge(Badges badge)
         {
-            var foundBadge = BadgesRepository.FindByCondition(b => b.BadgesId == badge.BadgesId);
+            var foundBadge = UnitOfWork.BadgesRepository.FindByCondition(b => b.BadgesId == badge.BadgesId);
             if (foundBadge != null)
             {
                 if(foundBadge.Name != badge.Name)
@@ -51,25 +46,25 @@ namespace TaskManager.ApplicationLogic.Services
                 {
                     foundBadge.NecessaryScore = badge.NecessaryScore;
                 }
-                BadgesRepository.Update(foundBadge);
-                BadgesRepository.Save();
+                UnitOfWork.BadgesRepository.Update(foundBadge);
+                UnitOfWork.BadgesRepository.Save();
             }
             
         }
 
         public Badges FindBadgesByCondition(Expression<Func<Badges, bool>> expression)
         {
-            return BadgesRepository.FindByCondition(expression);
+            return UnitOfWork.BadgesRepository.FindByCondition(expression);
         }
 
         public bool BadgeExists(int id)
         {
-            return BadgesRepository.BadgeExists(id);
+            return UnitOfWork.BadgesRepository.BadgeExists(id);
         }
 
         public List<Badges> FindAllBadges()
         {
-            return BadgesRepository.FindAll();
+            return UnitOfWork.BadgesRepository.FindAll();
         }
     }
 }

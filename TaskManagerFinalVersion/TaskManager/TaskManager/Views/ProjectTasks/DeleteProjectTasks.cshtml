@@ -1,15 +1,18 @@
-﻿@model TaskManager.DataAccess.Dtos.TasksViewModel
+﻿@model TaskManager.ApplicationLogic.Dtos.TasksViewModel
 
 @{
-    ViewData["Title"] = "Remove Tasks";
-    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+    ViewData["Title"] = "Remove tasks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styling{
+    <link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/delete_project_style.css" type="text/css" />
 }
 
-<link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
-<link rel="stylesheet" href="~/css/delete_project_style.css" type="text/css" />
+
 <h2 style="text-align: center; margin-top: 50px;"> Remove tasks</h2>
 <hr />
-<br/>
+<br />
 <div class="row justify-content-center" id="form-row">
     <div class="col-8">
         @using (Html.BeginForm("DeleteProjectTasks", "ProjectTasks", FormMethod.Post))

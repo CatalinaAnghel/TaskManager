@@ -9,8 +9,6 @@ namespace TaskManager.ApplicationLogic.Services.Abstractions
 {
     public interface IUserBadgesService
     {
-        IUserBadgesRepository UserBadgesRepository { get; }
-
         public List<UserBadges> FindBadges(Users user);
     }
 }

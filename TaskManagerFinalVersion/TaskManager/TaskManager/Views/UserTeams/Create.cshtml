@@ -2,10 +2,11 @@
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
+@section Styling{
+    <link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
+}
 
 <h2 style="text-align: center; margin-top: 50px;">Add a user in a team</h2>
 <hr />
@@ -31,11 +32,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Job" class="control-label">Enter the job:</label>
-                <input asp-for="Job" class="form-control" required/>
+                <input asp-for="Job" class="form-control" required />
                 <span asp-validation-for="Job" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" id="submit-button"/>
+                <input type="submit" value="Create" class="btn btn-primary" id="submit-button" />
             </div>
         </form>
     </div>

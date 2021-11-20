@@ -1,10 +1,13 @@
 ﻿@model IEnumerable<TaskManager.DataAccess.DataModels.Projects>
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="~/css/dashboard.css" />
-<script src="~/js/show_tasks.js" type="application/javascript"></script>
+
+@section Styling{
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+}
+
 <div class="row" style="margin-top: 10%; overflow-x:auto;">
     <table class="table col-md-12">
         <caption>See your projects</caption>
@@ -89,20 +92,15 @@
 
 <var id="var_item" style="display:none;">@ViewData["NoVisits"]</var>
 
-<div id="log_in_modal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content row">
+<partial name="_WelcomeModalPartial" />
 
-        <div class="col-11">
-            <p>Hello! <br> You are now logged in.</p>
-            <span style='font-size:40px;'>&#128513;</span>
-        </div>
-        <span class="close col-1" onclick="span_click()">&times;</span>
-    </div>
-</div>
 <button class="btn btn-primary" onclick="edit_visibility_tasks('info', this)" role="button" id="tasks-button">Show tasks</button>
 <div class="row" id="info">
     <p class="col-md-3">You have @ViewData["UrgentTask"] urgent tasks.</p>
     <p class="col-md-4">You have @ViewData["UnfinishedTasks"] unfinished tasks.</p>
     <p class="col-md-3">You have @ViewData["FinishedTasks"] finished tasks.</p>
 </div>
+
+@section Scripts{
+    <script src="~/js/show_tasks.js" type="application/javascript"></script>
+}

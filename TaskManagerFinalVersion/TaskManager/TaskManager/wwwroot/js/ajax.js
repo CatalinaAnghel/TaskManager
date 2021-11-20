@@ -1,7 +1,6 @@
 ﻿function get_tasks() {
     // get the project's id from the form
     var project = { id: $("#select-project").val() };
-    console.log(project);
     // make the AJAX request
     $.ajax({
         url: "../ProjectTasks/GetTasks",
@@ -53,7 +52,6 @@ function get_project_details() {
 function get_task_details() {
     // get the project's id from the form
     var task = { id: $("#selected-task").val() };
-    console.log(task);
     // make the AJAX request
     $.ajax({
         url: "/ProjectTasks/GetTaskDetails",

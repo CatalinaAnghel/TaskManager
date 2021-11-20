@@ -8,92 +8,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/after_login.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    @RenderSection("Styling", required: false)
     <script src="~/js/ajax.js" type="application/javascript"></script>
 </head>
 <body onload="get_image()" style="overflow-x: hidden;">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3" id="navbar-id">
-            <img src="~/images/logo_transparent.png" width="35" height="35" class="mr-2">
-            <a class="navbar-brand" asp-area="" asp-controller="Projects" asp-action="Index">Task Manager</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div id="hamburger_content" class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1 bg-dark text-light">
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="" asp-controller="Projects" asp-action="Index">Dashboard</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Teams
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" asp-area="" asp-controller="Teams" asp-action="Create">Create a team</a>
-                            <a class="dropdown-item" asp-area="" asp-controller="Teams" asp-action="Delete">Delete a team</a>
-                            <a class="dropdown-item" asp-area="" asp-controller="UserTeams" asp-action="Create">Add a user to a team</a>
-                            <a class="dropdown-item" asp-area="" asp-controller="UserTeams" asp-action="Delete">Remove a user from a team</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Projects
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" asp-area="" asp-controller="Projects" asp-action="Create">Add project</a>
-                            <a class="dropdown-item" asp-area="" asp-controller="Projects" asp-action="DeleteProject">Remove project</a>
-                            <a class="dropdown-item" asp-area="" asp-controller="Projects" asp-action="Edit">Update project</a>
-
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Tasks
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" asp-area="" asp-controller="ProjectTasks" asp-action="Index">See your tasks</a>
-                            <a class="dropdown-item" asp-area="" asp-controller="ProjectTasks" asp-action="SeeAllTasks">See the tasks</a>
-                            <a class="dropdown-item" asp-area="" asp-controller="ProjectTasks" asp-action="Create">Add a task</a>
-                            <a class="dropdown-item" asp-area="" asp-controller="ProjectTasks" asp-action="Assign">Assign a task</a>
-                            <a class="dropdown-item" asp-area="" asp-controller="ProjectTasks" asp-action="Edit">Update task</a>
-                            <a class="dropdown-item" asp-area="" asp-controller="ProjectTasks" asp-action="DeleteProjectTasks">Remove task</a>
-                        </div>
-                    </li>
-
-                    @if (User.IsInRole("Administrator"))
-                    {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Badges
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" asp-area="" asp-controller="Badges" asp-action="Index">See the badges</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Badges" asp-action="Create">Add a badge</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Badges" asp-action="Delete">Delete a badge</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Badges" asp-action="Edit">Update a badge</a>
-                            </div>
-                        </li>
-                    }
-                    <li class="form-inline mr-5 my-lg-0" id="user_menu">
-                        <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                               data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
-                                <img src="~/images/user_icon.jpg" width="30" height="30" id="user_image_field">
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" asp-controller="UserBadges" asp-action="SeeBadges">See badges</a>
-                                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Edit account</a>
-                                <div class="dropdown-divider"></div>
-                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                    <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-                                </form>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-        </nav>
+       
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -107,7 +27,6 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

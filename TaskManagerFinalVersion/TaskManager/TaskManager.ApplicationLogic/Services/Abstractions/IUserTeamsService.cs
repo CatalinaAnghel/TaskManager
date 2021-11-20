@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TaskManager.DataAccess.Repositories.Abstractions;
+﻿using System.Collections.Generic;
 using TaskManager.DataAccess.DataModels;
 
 namespace TaskManager.ApplicationLogic.Services.Abstractions

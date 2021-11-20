@@ -2,9 +2,12 @@
 
 @{
     ViewData["Title"] = "Delete";
-    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
+@section Styling{
+    <link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
+}
+
 <h2 style="text-align: center; margin-top: 50px;">Delete a badge</h2>
 <hr />
 <div class="row justify-content-center" id="form-row">
@@ -20,7 +23,7 @@
         <input type="hidden" asp-for="BadgesId" />
         <br>
         <div class="form-group">
-            <input type="submit" value="Delete" class="btn btn-primary" id = "submit-button" />
+            <input type="submit" value="Delete" class="btn btn-primary" id="submit-button" />
         </div>
     </form>
 </div>

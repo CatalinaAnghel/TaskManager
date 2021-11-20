@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
-using TaskManager.DataAccess.Repositories.Abstractions;
+using TaskManager.ApplicationLogic.Dtos;
 using TaskManager.DataAccess.DataModels;
-using TaskManager.DataAccess.Dtos;
 
 namespace TaskManager.ApplicationLogic.Services.Abstractions
 {
     public interface IProjectsService
-    {
-        IProjectsRepository ProjectsRepository { get; }
-      
+    {     
         public void AddProject(Projects project);
         public void UpdateProject(Projects project);
         public void DeleteProject(ProjectsViewModel model);

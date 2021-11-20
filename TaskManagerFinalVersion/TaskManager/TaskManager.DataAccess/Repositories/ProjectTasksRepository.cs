@@ -1,14 +1,12 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using TaskManager.DataAccess.DataModels;
-using TaskManager.DataAccess.Dtos;
 using TaskManager.DataAccess.Data;
 using TaskManager.DataAccess.Repositories.Abstractions;
+using TaskManager.DataAccess.Helpers;
 
 namespace TaskManager.DataAccess.Repositories
 {
@@ -33,7 +31,7 @@ namespace TaskManager.DataAccess.Repositories
         {
             var urgentTasksNumber = (from task in RepositoryContext.ProjectTasks
                                      where (task.UserId.Equals(userId) && EF.Functions.DateDiffDay(DateTime.Now, task.DueDate) < 7 &&
-                                     task.Status != "Done")
+                                     task.Status.Equals(TaskStatus.Done))
                                      select task).Count();
 
             return urgentTasksNumber;
@@ -43,7 +41,7 @@ namespace TaskManager.DataAccess.Repositories
         {
             var urgentTasksNumber = (from task in RepositoryContext.ProjectTasks
                                      where (task.UserId.Equals(userId) &&
-                                     task.Status.Equals("Done"))
+                                     task.Status.Equals(TaskStatus.Done))
                                      select task).Count();
             return urgentTasksNumber;
         }
@@ -57,14 +55,6 @@ namespace TaskManager.DataAccess.Repositories
             return urgentTasksNumber;
         }
 
-        public TasksViewModel GetTaskViewModel(string userId)
-        {
-            TasksViewModel model = new TasksViewModel
-            {
-                ProjectTasks = FindAllByUserIdOrPM(userId)
-            };
-            return model;
-        }
         public List<ProjectTasks> FindAllByUserIdOrPM(string userId)
         {
             var tasks = ((from task in RepositoryContext.ProjectTasks

@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using TaskManager.ApplicationLogic.Dtos;
 using TaskManager.ApplicationLogic.Services.Abstractions;
 using TaskManager.DataAccess.DataModels;
-using TaskManager.DataAccess.Dtos;
 
 namespace TaskManager.Controllers
 {

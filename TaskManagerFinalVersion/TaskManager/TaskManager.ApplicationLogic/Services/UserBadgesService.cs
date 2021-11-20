@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TaskManager.DataAccess.Data;
+﻿using System.Collections.Generic;
 using TaskManager.DataAccess.DataModels;
 using TaskManager.ApplicationLogic.Services.Abstractions;
-using TaskManager.DataAccess.Repositories;
-using TaskManager.DataAccess.Repositories.Abstractions;
+using TaskManager.DataAccess.UnitOfWork;
 
 namespace TaskManager.ApplicationLogic.Services
 {
     public class UserBadgesService : IUserBadgesService
     {
-        public IUserBadgesRepository UserBadgesRepository { get; }
-        public UserBadgesService(TaskManagerDbContext context)
+        public IUnitOfWork UnitOfWork { get; }
+        public UserBadgesService(IUnitOfWork unitOfWork)
         {
-            UserBadgesRepository = new UserBadgesRepository(context);
+            UnitOfWork = unitOfWork;
         }
 
         public List<UserBadges> FindBadges(Users user)
         {
-            return UserBadgesRepository.FindBadges(user);
+            return UnitOfWork.UserBadgesRepository.FindBadges(user);
         }
     }
 }

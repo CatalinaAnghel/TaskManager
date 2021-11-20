@@ -10,8 +10,6 @@ namespace TaskManager.ApplicationLogic.Services.Abstractions
 {
     public interface IBadgesService
     {
-        IBadgesRepository BadgesRepository { get; }
-
         public void AddBadge(Badges badge);
 
         public void DeleteBadge(Badges badge);

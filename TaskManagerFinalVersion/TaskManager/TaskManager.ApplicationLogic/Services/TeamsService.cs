@@ -1,24 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
-using TaskManager.DataAccess.Data;
 using TaskManager.DataAccess.DataModels;
 using TaskManager.ApplicationLogic.Services.Abstractions;
-using TaskManager.DataAccess.Repositories;
-using TaskManager.DataAccess.Repositories.Abstractions;
+using TaskManager.DataAccess.UnitOfWork;
 
 namespace TaskManager.ApplicationLogic.Services
 {
     public class TeamsService: ITeamsService
     {
-        public ITeamsRepository TeamsRepository { get; }
-        public IUserTeamsRepository UserTeamsRepository { get; }
-        public TeamsService(TaskManagerDbContext context)
+        public IUnitOfWork UnitOfWork { get; }
+        public TeamsService(IUnitOfWork unitOfWork)
         {
-            TeamsRepository = new TeamsRepository(context);
-            UserTeamsRepository = new UserTeamsRepository(context);
+            UnitOfWork = unitOfWork;
         }
 
         public void AddTeam(Users user, Teams team)
@@ -29,50 +23,50 @@ namespace TaskManager.ApplicationLogic.Services
                 Team = team,
                 Job = "PM"
             };
-            
-            TeamsRepository.Create(team);
-            TeamsRepository.Save();
-            UserTeamsRepository.Create(ut);
-            UserTeamsRepository.Save();
+
+            UnitOfWork.TeamsRepository.Create(team);
+            UnitOfWork.TeamsRepository.Save();
+            UnitOfWork.UserTeamsRepository.Create(ut);
+            UnitOfWork.UserTeamsRepository.Save();
         }
 
         public void DeleteTeam(Teams team)
         {
-            var foundTeam = TeamsRepository.FindByCondition(t => t.TeamsId == team.TeamsId);
+            var foundTeam = UnitOfWork.TeamsRepository.FindByCondition(t => t.TeamsId == team.TeamsId);
             if(foundTeam != null)
             {
-                TeamsRepository.Delete(foundTeam);
-                TeamsRepository.Save();
+                UnitOfWork.TeamsRepository.Delete(foundTeam);
+                UnitOfWork.TeamsRepository.Save();
             }
         }
 
         public void UpdateTeam(Teams team)
         {
-            var foundTeam = TeamsRepository.FindByCondition(t => t.TeamsId == team.TeamsId);
+            var foundTeam = UnitOfWork.TeamsRepository.FindByCondition(t => t.TeamsId == team.TeamsId);
             if (foundTeam != null)
             {
                 foundTeam.Name = team.Name;
                 foundTeam.Project = team.Project;
                 foundTeam.ProjectId = team.ProjectId;
-         
-                TeamsRepository.Update(foundTeam);
-                TeamsRepository.Save();
+
+                UnitOfWork.TeamsRepository.Update(foundTeam);
+                UnitOfWork.TeamsRepository.Save();
             }
         }
 
         public List<Teams> FindAll()
         {
-            return TeamsRepository.FindAll();
+            return UnitOfWork.TeamsRepository.FindAll();
         }
 
         public Teams FindByCondition(Expression<Func<Teams, bool>> expression)
         {
-            return TeamsRepository.FindByCondition(expression);
+            return UnitOfWork.TeamsRepository.FindByCondition(expression);
         }
 
         public List<Teams> FindTeamsByPM(Users user)
         {
-            var teams = TeamsRepository.FindTeamsByPM(user);
+            var teams = UnitOfWork.TeamsRepository.FindTeamsByPM(user);
             return teams;
         }
     }

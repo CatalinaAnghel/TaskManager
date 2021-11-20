@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using TaskManager.DataAccess.DataModels;
-using TaskManager.DataAccess.Dtos;
 
 namespace TaskManager.DataAccess.Repositories.Abstractions
 {
@@ -16,7 +13,6 @@ namespace TaskManager.DataAccess.Repositories.Abstractions
         public int GetNumberOfFinishedTasks(string userId);
         public int GetNumberOfUnfinishedTasks(string userId);
         public ProjectTasks FindProjectTaskByCondition(Expression<Func<ProjectTasks, bool>> expression);
-        public TasksViewModel GetTaskViewModel(string userId);
         public List<ProjectTasks> FindAllByUserIdOrPM(string userId);
         public List<ProjectTasks> FindAll(Users user);
     }

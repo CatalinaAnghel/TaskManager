@@ -1,12 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +10,7 @@ using TaskManager.ApplicationLogic.Services.Abstractions;
 using TaskManager.DataAccess.Data;
 using TaskManager.DataAccess.DataModels;
 using TaskManager.ApplicationLogic.Services;
+using TaskManager.DataAccess.UnitOfWork;
 
 namespace TaskManager
 {
@@ -63,6 +59,10 @@ namespace TaskManager
            
             services.AddControllersWithViews();
 
+            // UnitOfWork
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // Services
             services.AddScoped<ISignInService, SignInService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IProjectsService, ProjectsService>();

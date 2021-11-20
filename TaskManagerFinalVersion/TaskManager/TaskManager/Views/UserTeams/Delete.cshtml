@@ -2,11 +2,12 @@
 
 @{
     ViewData["Title"] = "Delete";
-    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
-<script src="~/js/ajax.js" type="application/javascript"></script>
+@section Styling{ 
+    <link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
+}
 
 <h2 style="text-align: center; margin-top: 50px;">Remove a user from a team</h2>
 <hr />
@@ -37,3 +38,7 @@
         </form>
     </div>
 </div>
+
+@section Scripts{ 
+    <script src="~/js/ajax.js" type="application/javascript"></script>
+} 

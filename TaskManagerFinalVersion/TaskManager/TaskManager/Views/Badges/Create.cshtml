@@ -2,10 +2,12 @@
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styling{
+    <link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
 }
 
-<link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
 <h2 style="text-align: center; margin-top: 50px;">Add a new badge</h2>
 <hr />
 <div class="row justify-content-center" id="form-row">
@@ -19,11 +21,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="NecessaryScore" class="control-label">Necessary score:</label>
-                <input asp-for="NecessaryScore" class="form-control" type="number" step="any"/>
+                <input asp-for="NecessaryScore" class="form-control" type="number" step="any" />
                 <span asp-validation-for="NecessaryScore" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Add badge" class="btn btn-primary" id="submit-button"/>
+                <input type="submit" value="Add badge" class="btn btn-primary" id="submit-button" />
             </div>
         </form>
     </div>

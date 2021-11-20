@@ -2,11 +2,13 @@
 
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="~/js/ajax.js" type="application/javascript"></script>
-<link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
+@section Styling{
+    <link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
+
+}
 
 <h2 style="text-align: center; margin-top: 50px;">Update a project</h2>
 <hr />
@@ -72,8 +74,12 @@
                 <span asp-validation-for="Importance" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Update project" class="btn btn-primary" id="submit-button"  />
+                <input type="submit" value="Update project" class="btn btn-primary" id="submit-button" />
             </div>
         </form>
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/js/ajax.js" type="application/javascript"></script>
+}

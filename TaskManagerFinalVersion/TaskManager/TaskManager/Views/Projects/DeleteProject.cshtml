@@ -1,36 +1,38 @@
-﻿@model TaskManager.DataAccess.Dtos.ProjectsViewModel
+﻿@model TaskManager.ApplicationLogic.Dtos.ProjectsViewModel
 
 @{
-    ViewData["Title"] = "DeleteProject";
-    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+    ViewData["Title"] = "Delete project";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@section Styling{
     <link rel="stylesheet" href="~/css/form_styling.css" type="text/css" />
     <link rel="stylesheet" href="~/css/delete_project_style.css" type="text/css" />
-    <h2 class="title" style="text-align: center; margin-top: 50px;"> Remove projects</h2>
-    <hr />
-    <div class="row justify-content-center" id="form-row">
-        <div class="col-8">
-            @using (Html.BeginForm("DeleteProjects", "Projects", FormMethod.Post))
+}
+
+<h2 class="title" style="text-align: center; margin-top: 50px;"> Remove projects</h2>
+<hr />
+<div class="row justify-content-center" id="form-row">
+    <div class="col-8">
+        @using (Html.BeginForm("DeleteProjects", "Projects", FormMethod.Post))
+        {
+            <div class="form-group">
+                <label id="label-for-projects">Chose the projects you want to delete:</label><br />
+            </div>
+            for (int i = 0; i < Model.Projects.Count(); i++)
             {
                 <div class="form-group">
-                    <label id="label-for-projects">Chose the projects you want to delete:</label><br />
-                </div>
-                for (int i = 0; i < Model.Projects.Count(); i++)
-                {
-                    <div class="form-group">
-                        @Html.CheckBoxFor(c => c.Projects[i].Selected)
-                        @Model.Projects[i].Name
-                        @Html.HiddenFor(c => c.Projects[i].ProjectsId)
-                        @Html.HiddenFor(c => c.Projects[i].Name)
-                        <br />
-            
-                    </div>
+                    @Html.CheckBoxFor(c => c.Projects[i].Selected)
+                    @Model.Projects[i].Name
+                    @Html.HiddenFor(c => c.Projects[i].ProjectsId)
+                    @Html.HiddenFor(c => c.Projects[i].Name)
+                    <br />
 
-                }
-                <div class="form-group">
-                    <input type="submit" value="Delete project(s)" class="btn btn-primary" id="submit-button" />
                 </div>
+
             }
-        </div>
+            <div class="form-group">
+                <input type="submit" value="Delete project(s)" class="btn btn-primary" id="submit-button" />
+            </div>
+        }
     </div>
+</div>

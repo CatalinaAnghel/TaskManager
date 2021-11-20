@@ -1,10 +1,14 @@
 ﻿@model IEnumerable<TaskManager.DataAccess.DataModels.ProjectTasks>
 
 @{
-    ViewData["Title"] = "See All Tasks";
-    Layout = "~/Views/Shared/_Layout_After_Login.cshtml";
+    ViewData["Title"] = "See all tasks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="~/css/dashboard.css" />
+
+@section Styling{
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+}
+
 <div class="row" style="margin-top: 10%; overflow-x:auto;">
     <table class="table col-md-12">
         <caption>See all the tasks</caption>
