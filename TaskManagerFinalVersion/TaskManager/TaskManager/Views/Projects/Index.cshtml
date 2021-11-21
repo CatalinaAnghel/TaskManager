@@ -94,7 +94,7 @@
 
 <partial name="_WelcomeModalPartial" />
 
-<button class="btn btn-primary" onclick="edit_visibility_tasks('info', this)" role="button" id="tasks-button">Show tasks</button>
+<button class="btn btn-primary" role="button" id="tasks-button">Show tasks</button>
 <div class="row" id="info">
     <p class="col-md-3">You have @ViewData["UrgentTask"] urgent tasks.</p>
     <p class="col-md-4">You have @ViewData["UnfinishedTasks"] unfinished tasks.</p>
@@ -102,5 +102,5 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/show_tasks.js" type="application/javascript"></script>
+    <script src="~/js/dashboard.js" type="application/javascript"></script>
 }

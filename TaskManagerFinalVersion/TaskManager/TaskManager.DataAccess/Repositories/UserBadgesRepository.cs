@@ -17,7 +17,11 @@ namespace TaskManager.DataAccess.Repositories
         }
         public List<UserBadges> FindBadges(Users user)
         {
-            return RepositoryContext.UserBadges.Where(ub => ub.UsersId == user.Id).Include(ub => ub.Badge).OrderBy(ub => ub.Badge.NecessaryScore).ToList();
+            return RepositoryContext.UserBadges
+                .Where(ub => ub.UsersId == user.Id)
+                .Include(ub => ub.Badge)
+                .OrderBy(ub => ub.Badge.NecessaryScore)
+                .ToList();
         }
     }
 }

@@ -18,7 +18,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ProjectsId" class="control-label">Project</label>
-                <select id="selected-project" onchange="get_project_details()" asp-for="ProjectsId" class="form-control" asp-items="ViewBag.ProjectsId">
+                <select id="selected-project" asp-for="ProjectsId" class="form-control" asp-items="ViewBag.ProjectsId">
                     <option selected="selected">
                         Choose a project
                     </option>
@@ -52,10 +52,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Difficulty" class="control-label">Difficulty</label>
-                <select asp-for="Difficulty" class="form-control" id="project_difficulty" required>
-                    <option>Easy</option>
-                    <option>Intermediate</option>
-                    <option>Hard</option>
+                <select asp-for="Difficulty" class="form-control" id="difficulty-field" required>
+                    <partial name="_DropdownPartial" model="ViewBag.DifficultyLevelDropdown" />
                 </select>
                 <span asp-validation-for="Difficulty" class="text-danger"></span>
             </div>
@@ -65,11 +63,9 @@
                 <span asp-validation-for="Link" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Importance" class="control-label">Difficulty</label>
+                <label asp-for="Importance" class="control-label">Importance</label>
                 <select asp-for="Importance" class="form-control" id="importance-field" required>
-                    <option>Low</option>
-                    <option>Medium</option>
-                    <option>High</option>
+                    <partial name="_DropdownPartial" model="ViewBag.ImportanceLevelDropdown" />
                 </select>
                 <span asp-validation-for="Importance" class="text-danger"></span>
             </div>
@@ -81,5 +77,5 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/ajax.js" type="application/javascript"></script>
+    <script src="~/js/projects.js" type="application/javascript"></script>
 }

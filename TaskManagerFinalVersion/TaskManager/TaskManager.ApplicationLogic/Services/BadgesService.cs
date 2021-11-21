@@ -19,7 +19,7 @@ namespace TaskManager.ApplicationLogic.Services
         public void AddBadge(Badges badge)
         {
             UnitOfWork.BadgesRepository.Create(badge);
-            UnitOfWork.BadgesRepository.Save();
+            UnitOfWork.Complete();
         }
 
         public void DeleteBadge(Badges badge)
@@ -28,7 +28,7 @@ namespace TaskManager.ApplicationLogic.Services
             if(badge != null)
             {
                 UnitOfWork.BadgesRepository.Delete(foundBadge);
-                UnitOfWork.BadgesRepository.Save();
+                UnitOfWork.Complete();
             }
            
         }
@@ -47,7 +47,7 @@ namespace TaskManager.ApplicationLogic.Services
                     foundBadge.NecessaryScore = badge.NecessaryScore;
                 }
                 UnitOfWork.BadgesRepository.Update(foundBadge);
-                UnitOfWork.BadgesRepository.Save();
+                UnitOfWork.Complete();
             }
             
         }

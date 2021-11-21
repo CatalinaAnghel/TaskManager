@@ -10,7 +10,7 @@ namespace TaskManager.ApplicationLogic.Services.Abstractions
     {     
         public void AddProject(Projects project);
         public void UpdateProject(Projects project);
-        public void DeleteProject(ProjectsViewModel model);
+        public void DeleteProject(ProjectsDto model);
         public List<Projects> FindAll();
         public List<Projects> FindProjectByUserId(string userId);
         public List<Projects> FindProjectByPM(string userId);

@@ -5,13 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TaskManager.ApplicationLogic.Dtos;
+using TaskManager.ApplicationLogic.Helpers;
 using TaskManager.ApplicationLogic.Services.Abstractions;
 using TaskManager.DataAccess.DataModels;
+using TaskManager.Models;
 
 namespace TaskManager.Controllers
 {
     [Authorize]
-    public class ProjectTasksController : Controller
+    public class ProjectTasksController : BaseController
     {
         private readonly IProjectTasksService _taskService;
         private readonly IProjectsService _projectsService;
@@ -73,7 +75,7 @@ namespace TaskManager.Controllers
         }
 
         [HttpPost, ActionName("DeleteProjectTasks")]
-        public IActionResult DeleteProjectTasks(TasksViewModel model)
+        public IActionResult DeleteProjectTasks(TasksDto model)
         {
             if (ModelState.IsValid)
             {
@@ -114,6 +116,13 @@ namespace TaskManager.Controllers
 
             ViewData["ProjectId"] = new SelectList(_projectsService.FindProjectByPM(user.Id), "ProjectsId", "Name");
             ViewData["UserId"] = new SelectList(_usersService.FindAll(), "Id", "UserName");
+            ViewData["ImportanceLevelDropdown"] = this.BuildDropdownViewModel(
+                Enum.GetValues(typeof(ImportanceLevel))
+                );
+
+            ViewData["StatusDropdown"] = this.BuildDropdownViewModel(
+                Enum.GetValues(typeof(ApplicationLogic.Helpers.TaskStatus))
+                );
 
             return View();
         }
@@ -134,6 +143,13 @@ namespace TaskManager.Controllers
 
             ViewData["ProjectId"] = new SelectList(_projectsService.FindProjectByPM(user.Id), "ProjectsId", "Name");
             ViewData["UserId"] = new SelectList(_usersService.FindAll(), "Id", "UserName");
+            ViewData["ImportanceLevelDropdown"] = this.BuildDropdownViewModel(
+                Enum.GetValues(typeof(ImportanceLevel))
+                );
+
+            ViewData["StatusDropdown"] = this.BuildDropdownViewModel(
+                Enum.GetValues(typeof(ApplicationLogic.Helpers.TaskStatus))
+                );
             return View(projectTasks);
         }
 
@@ -149,6 +165,13 @@ namespace TaskManager.Controllers
             ViewData["ProjectTasksId"] = new SelectList(projectTasks, "ProjectTasksId", "Name");
             ViewData["ProjectId"] = new SelectList(projects, "ProjectsId", "Name");
             ViewData["UserId"] = new SelectList(_usersService.FindAll(), "Id", "UserName");
+            ViewData["ImportanceLevelDropdown"] = this.BuildDropdownViewModel(
+                Enum.GetValues(typeof(ImportanceLevel))
+                );
+
+            ViewData["StatusDropdown"] = this.BuildDropdownViewModel(
+                Enum.GetValues(typeof(ApplicationLogic.Helpers.TaskStatus))
+                );
 
             return View();
         }
@@ -180,6 +203,13 @@ namespace TaskManager.Controllers
             }
             ViewData["ProjectId"] = new SelectList(_projectsService.FindProjectByPM(projectTasks.UserId), "ProjectsId", "Name");
             ViewData["UserId"] = new SelectList(_usersService.FindAll(), "Id", "UserName");
+            ViewData["ImportanceLevelDropdown"] = this.BuildDropdownViewModel(
+                Enum.GetValues(typeof(ImportanceLevel))
+                );
+
+            ViewData["StatusDropdown"] = this.BuildDropdownViewModel(
+                Enum.GetValues(typeof(ApplicationLogic.Helpers.TaskStatus))
+                );
             return View(projectTasks);
         }
 

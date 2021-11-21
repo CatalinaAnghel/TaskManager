@@ -17,7 +17,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ProjectTasksId" class="control-label">Task</label>
-                <select id="selected-task" onchange="get_task_details()" asp-for="ProjectTasksId" class="form-control" asp-items="ViewBag.ProjectTasksId">
+                <select id="selected-task" asp-for="ProjectTasksId" class="form-control" asp-items="ViewBag.ProjectTasksId">
                     <option selected="selected">
                         Choose a task
                     </option>
@@ -37,9 +37,7 @@
             <div class="form-group">
                 <label asp-for="Importance" class="control-label">Importance</label>
                 <select asp-for="Importance" class="form-control" id="importance-field" required>
-                    <option>Low</option>
-                    <option>Medium</option>
-                    <option>High</option>
+                    <partial name="_DropdownPartial" model="ViewBag.ImportanceLevelDropdown" />
                 </select>
                 <span asp-validation-for="Importance" class="text-danger"></span>
             </div>
@@ -51,9 +49,7 @@
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
                 <select asp-for="Status" class="form-control" id="status-field" required>
-                    <option>Not finished</option>
-                    <option>Done</option>
-                    <option>Abandoned</option>
+                    <partial name="_DropdownPartial" model="ViewBag.StatusDropdown" />
                 </select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
@@ -80,5 +76,5 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/ajax.js" type="application/javascript"></script>
+    <script src="~/js/tasks.js" type="application/javascript"></script>
 }

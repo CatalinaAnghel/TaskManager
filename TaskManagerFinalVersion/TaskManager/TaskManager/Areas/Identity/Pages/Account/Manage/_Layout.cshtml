@@ -1,7 +1,9 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@section Styling {
+    @RenderSection("Styling", required: false)
+}
 <h1>Manage your account</h1>
 
 <div>

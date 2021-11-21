@@ -14,6 +14,5 @@ namespace TaskManager.DataAccess.UnitOfWork{
 
         Task<int> CompleteAsync();
         int Complete();
-        public void Dispose();
     }
 }

@@ -10,7 +10,7 @@ namespace TaskManager.Areas.Identity.Pages.Account
     {
         public void OnGet()
         {
-
+            // render the Access denied page
         }
     }
 }

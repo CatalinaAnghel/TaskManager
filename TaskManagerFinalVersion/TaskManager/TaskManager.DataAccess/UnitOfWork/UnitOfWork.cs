@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using TaskManager.DataAccess.Data;
 using TaskManager.DataAccess.Repositories;
 using TaskManager.DataAccess.Repositories.Abstractions;
 
 namespace TaskManager.DataAccess.UnitOfWork
 {
-    public class UnitOfWork: IUnitOfWork{
+    public sealed class UnitOfWork: IUnitOfWork{
         private readonly TaskManagerDbContext dbContext;
 
         public UnitOfWork(TaskManagerDbContext dbContext){
@@ -114,6 +115,9 @@ namespace TaskManager.DataAccess.UnitOfWork
             return await dbContext.SaveChangesAsync();
         }
 
-        public void Dispose() => dbContext.Dispose();
+        public void Dispose()
+        {
+            dbContext.Dispose();
+        }
     }
 }

@@ -1,2 +1,7 @@
 ﻿<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+@if (User.IsInRole("Administrator") || User.IsInRole("User"))
+{
+    <script src="~/js/common.js" type="application/javascript"></script>
+}

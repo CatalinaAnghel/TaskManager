@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -6,13 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using TaskManager.ApplicationLogic.Dtos;
+using TaskManager.ApplicationLogic.Helpers;
 using TaskManager.ApplicationLogic.Services.Abstractions;
 using TaskManager.DataAccess.DataModels;
 
 namespace TaskManager.Controllers
 {
     [Authorize(Roles="Administrator, User")]
-    public class ProjectsController : Controller
+    public class ProjectsController : BaseController
     {
         private readonly IProjectsService _projectsService;
         private readonly IProjectTasksService _tasksService;
@@ -31,7 +33,8 @@ namespace TaskManager.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _usersService.GetCurrentUser(HttpContext.User);
-            var number = HttpContext.Session.GetString("DashboardVisits") + 1;
+            int number = HttpContext.Session.GetString("DashboardVisits") != null? 
+                Int32.Parse(HttpContext.Session.GetString("DashboardVisits")) + 1 : 1;
             
             ViewData["NoVisits"] = number ;
 
@@ -63,6 +66,13 @@ namespace TaskManager.Controllers
         // GET: Projects/Create
         public IActionResult Create()
         {
+            ViewData["ImportanceLevelDropdown"] = this.BuildDropdownViewModel(
+               Enum.GetValues(typeof(ImportanceLevel))
+               );
+
+            ViewData["DifficultyLevelDropdown"] = this.BuildDropdownViewModel(
+                Enum.GetValues(typeof(DifficultyLevel))
+                );
             return View();
         }
 
@@ -77,6 +87,14 @@ namespace TaskManager.Controllers
 
                 return RedirectToAction("Create", "Teams");
             }
+
+            ViewData["ImportanceLevelDropdown"] = this.BuildDropdownViewModel(
+               Enum.GetValues(typeof(ImportanceLevel))
+               );
+
+            ViewData["DifficultyLevelDropdown"] = this.BuildDropdownViewModel(
+                Enum.GetValues(typeof(DifficultyLevel))
+                );
             return View(projects);
         }
 
@@ -91,7 +109,13 @@ namespace TaskManager.Controllers
         {
             var user = await _usersService.GetCurrentUser(HttpContext.User);
             ViewData["ProjectsId"] = new SelectList(_projectsService.FindProjectByUserId(user.Id), "ProjectsId", "Name");
+            ViewData["ImportanceLevelDropdown"] = this.BuildDropdownViewModel(
+               Enum.GetValues(typeof(ImportanceLevel))
+               );
 
+            ViewData["DifficultyLevelDropdown"] = this.BuildDropdownViewModel(
+                Enum.GetValues(typeof(DifficultyLevel))
+                );
             return View();
         }
 
@@ -121,7 +145,13 @@ namespace TaskManager.Controllers
             }
             var user = await _usersService.GetCurrentUser(HttpContext.User);
             ViewData["ProjectsId"] = new SelectList(_projectsService.FindProjectByUserId(user.Id), "ProjectsId", "Name");
+            ViewData["ImportanceLevelDropdown"] = this.BuildDropdownViewModel(
+               Enum.GetValues(typeof(ImportanceLevel))
+               );
 
+            ViewData["DifficultyLevelDropdown"] = this.BuildDropdownViewModel(
+                Enum.GetValues(typeof(DifficultyLevel))
+                );
             return View(projects);
         }
 
@@ -129,7 +159,7 @@ namespace TaskManager.Controllers
         public async Task<IActionResult> DeleteProject()
         {
             var user = await _usersService.GetCurrentUser(HttpContext.User);
-            ProjectsViewModel model = new ProjectsViewModel
+            ProjectsDto model = new ProjectsDto
             {
                 Projects = _projectsService.FindProjectByPM(user.Id)
             };
@@ -137,7 +167,7 @@ namespace TaskManager.Controllers
         }
 
         [HttpPost, ActionName("DeleteProjects")]
-        public ActionResult DeleteProject(ProjectsViewModel model)
+        public ActionResult DeleteProject(ProjectsDto model)
         {
             if (ModelState.IsValid)
             {

@@ -21,17 +21,17 @@ namespace TaskManager.ApplicationLogic.Services
         public void AddProject(Projects project)
         {
             UnitOfWork.ProjectsRepository.Create(project);
-            UnitOfWork.ProjectsRepository.Save();
+            UnitOfWork.Complete();
         }
 
         public void UpdateProject(Projects project)
         {
             UnitOfWork.ProjectsRepository.Update(project);
-            UnitOfWork.ProjectsRepository.Save();
+            UnitOfWork.Complete();
 
         }
 
-        public void DeleteProject(ProjectsViewModel model)
+        public void DeleteProject(ProjectsDto model)
         {
             foreach (var project in model.Projects)
             {
@@ -41,7 +41,7 @@ namespace TaskManager.ApplicationLogic.Services
                 }
 
             }
-            UnitOfWork.ProjectsRepository.Save();
+            UnitOfWork.Complete();
         }
 
         public List<Projects> FindAll()

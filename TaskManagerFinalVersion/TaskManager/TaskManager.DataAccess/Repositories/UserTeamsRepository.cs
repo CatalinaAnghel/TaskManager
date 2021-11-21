@@ -17,7 +17,11 @@ namespace TaskManager.DataAccess.Repositories
 
         public List<Users> GetColleagues(int id, Users user)
         {
-            return RepositoryContext.UserTeams.Where(ut => ut.TeamsId == id).Where(ut => ut.UsersId != user.Id).Select(ut => ut.User).ToList();
+            return RepositoryContext.UserTeams
+                .Where(ut => ut.TeamsId == id)
+                .Where(ut => ut.UsersId != user.Id)
+                .Select(ut => ut.User)
+                .ToList();
         }
     }
 }

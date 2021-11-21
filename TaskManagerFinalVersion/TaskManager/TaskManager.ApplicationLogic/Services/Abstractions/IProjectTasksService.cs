@@ -9,7 +9,7 @@ namespace TaskManager.ApplicationLogic.Services.Abstractions
     public interface IProjectTasksService
     {
         public void AddTask(ProjectTasks task);
-        public void DeleteTask(TasksViewModel model);
+        public void DeleteTask(TasksDto model);
         public void UpdateTask(ProjectTasks task);
         public int GetNumberOfUrgentTasks(string userId);
         public int GetNumberOfFinishedTasks(string userId);
@@ -22,6 +22,6 @@ namespace TaskManager.ApplicationLogic.Services.Abstractions
         public List<ProjectTasks> SeeTasks(string userId);
         public ProjectTasks FindByCondition(Expression<Func<ProjectTasks, bool>> expression);
         public List<ProjectTasks> FindAll(Users user);
-        public TasksViewModel GetTaskViewModel(string userId);
+        public TasksDto GetTaskViewModel(string userId);
     }
 }

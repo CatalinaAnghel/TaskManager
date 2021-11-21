@@ -19,19 +19,28 @@ namespace TaskManager.DataAccess.Repositories
 
         public ProjectTasks FindProjectTaskByCondition(Expression<Func<ProjectTasks, bool>> expression)
         {
-            return RepositoryContext.ProjectTasks.Where(expression).Include(t=>t.Project).Include(t=>t.User).SingleOrDefault();
+            return RepositoryContext.ProjectTasks
+                .Where(expression)
+                .Include(t=>t.Project)
+                .Include(t=>t.User)
+                .SingleOrDefault();
         }
 
         public List<ProjectTasks> SeeTasks(string userId)
         {
-            return RepositoryContext.ProjectTasks.Where(t => t.UserId == userId).Include(t => t.Project).Include(t => t.User).ToList();
+            return RepositoryContext.ProjectTasks
+                .Where(t => t.UserId == userId)
+                .Include(t => t.Project)
+                .Include(t => t.User)
+                .ToList();
         }
 
         public int GetNumberOfUrgentTasks(string userId)
         {
             var urgentTasksNumber = (from task in RepositoryContext.ProjectTasks
-                                     where (task.UserId.Equals(userId) && EF.Functions.DateDiffDay(DateTime.Now, task.DueDate) < 7 &&
-                                     task.Status.Equals(TaskStatus.Done))
+                                     where (task.UserId.Equals(userId) &&
+                                     EF.Functions.DateDiffDay(DateTime.Now, task.DueDate) < 7 &&
+                                     task.Status.Equals(TaskStatus.Done.ToString()))
                                      select task).Count();
 
             return urgentTasksNumber;
@@ -41,7 +50,7 @@ namespace TaskManager.DataAccess.Repositories
         {
             var urgentTasksNumber = (from task in RepositoryContext.ProjectTasks
                                      where (task.UserId.Equals(userId) &&
-                                     task.Status.Equals(TaskStatus.Done))
+                                     task.Status.Equals(TaskStatus.Done.ToString()))
                                      select task).Count();
             return urgentTasksNumber;
         }
@@ -50,7 +59,7 @@ namespace TaskManager.DataAccess.Repositories
         {
             var urgentTasksNumber = (from task in RepositoryContext.ProjectTasks
                                      where (task.UserId.Equals(userId) &&
-                                     task.Status != "Done")
+                                     !task.Status.Equals(TaskStatus.Done.ToString()))
                                      select task).Count();
             return urgentTasksNumber;
         }
@@ -77,7 +86,10 @@ namespace TaskManager.DataAccess.Repositories
                             join ut in RepositoryContext.UserTeams on t.TeamsId equals ut.TeamsId
                             where ut.UsersId == user.Id
                             select p.ProjectsId).Distinct().ToList();
-            return RepositoryContext.ProjectTasks.Where(t=> projects.Contains(t.ProjectId)).Include(t => t.Project).Include(t => t.User).ToList();
+            return RepositoryContext.ProjectTasks
+                .Where(t=> projects.Contains(t.ProjectId))
+                .Include(t => t.Project)
+                .Include(t => t.User).ToList();
         }
     }
 }

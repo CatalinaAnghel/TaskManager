@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<script src="js/show_text.js" type="application/javascript"></script>
+
 
 <div class="container-image" onmouseover="get_image()" onmouseout="restore_picture()">
     <img src="images/team.jpg" alt="Image of a team" id="team_image" />
@@ -36,3 +36,7 @@
     <img src="images/black-ring-bell-alarm-clock-682422.jpg" alt="Clock image" id="clock-image" onmouseover="change_picture(this, 'images/throwing_papers.jpg')" onmouseout="change_picture(this, 'images/black-ring-bell-alarm-clock-682422.jpg')" />
     <img src="images/coffee.jpg" alt="Coffee image" id="coffee-image" onmouseover="change_picture(this, 'images/quote.jpg')" onmouseout="change_picture(this, 'images/coffee.jpg')" />
 </div>
+
+@section Scripts{
+    <script src="js/home.js" type="application/javascript"></script>
+}

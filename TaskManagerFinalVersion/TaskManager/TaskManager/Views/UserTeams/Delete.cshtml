@@ -17,7 +17,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="TeamsId" class="control-label">Team:</label>
-                <select asp-for="TeamsId" class="form-control" onchange="get_colleagues()" asp-items="ViewBag.Teams" id="team_field" required>
+                <select asp-for="TeamsId" class="form-control" asp-items="ViewBag.Teams" id="team_field" required>
                     <option selected="selected">
                         Choose a team
                     </option>
@@ -40,5 +40,5 @@
 </div>
 
 @section Scripts{ 
-    <script src="~/js/ajax.js" type="application/javascript"></script>
+    <script src="~/js/team_members.js" type="application/javascript"></script>
 } 

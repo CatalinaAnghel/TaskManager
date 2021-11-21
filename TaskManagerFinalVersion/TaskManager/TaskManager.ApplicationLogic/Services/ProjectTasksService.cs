@@ -23,21 +23,22 @@ namespace TaskManager.ApplicationLogic.Services
             task.User = null;
             task.UserId = null;
             UnitOfWork.ProjectTasksRepository.Create(task);
-            UnitOfWork.ProjectTasksRepository.Save();
+            UnitOfWork.Complete();
         }
 
         public void UpdateTask(ProjectTasks task)
         {
             var foundTask = UnitOfWork.ProjectTasksRepository
                 .FindByCondition(t => t.ProjectTasksId == task.ProjectTasksId);
-            if (task.Status.Equals(TaskStatus.Done) && !foundTask.Status.Equals(TaskStatus.Done))
+            if (task.Status.Equals(TaskStatus.Done.ToString()) && !foundTask.Status.Equals(TaskStatus.Done.ToString()))
             {
-                var foundUser = UnitOfWork.UsersRepository.FindByCondition(u => u.Id == task.UserId);
+                var foundUser = UnitOfWork.UsersRepository
+                    .FindByCondition(u => u.Id == task.UserId);
                 if (foundUser != null)
                 {
                     foundUser.Score += task.Points;
                     UnitOfWork.UsersRepository.Update(foundUser);
-                    UnitOfWork.UsersRepository.Save();
+                    UnitOfWork.Complete();
                     var badge = UnitOfWork.BadgesRepository.GetBadge(foundUser);
                     if (badge != null)
                     {
@@ -47,6 +48,7 @@ namespace TaskManager.ApplicationLogic.Services
                             BadgeId = badge.BadgesId
                         };
                         UnitOfWork.UserBadgesRepository.Create(userBadge);
+                        UnitOfWork.Complete();
                     }
 
                 }
@@ -55,56 +57,31 @@ namespace TaskManager.ApplicationLogic.Services
             {
                 if (foundTask.Status != task.Status)
                 {
-                    if (foundTask.Status.Equals(TaskStatus.Done))
+                    if (foundTask.Status.Equals(TaskStatus.Done.ToString()))
                     {
-                        var user = UnitOfWork.UsersRepository
-                            .FindByCondition(u => u.Id == foundTask.UserId);
-                        if (user != null)
-                        {
-                            user.Score -= foundTask.Points;
-                        }
-                        UnitOfWork.UsersRepository.Update(user);
-                        UnitOfWork.UsersRepository.Save();
+                        this.UpdateUserAchivements(foundTask);
                     }
                     foundTask.Status = task.Status;
                 }
             }
-
-            if (foundTask.Description != task.Description)
-            {
-                foundTask.Description = task.Description;
-            }
-            if (foundTask.DueDate != task.DueDate)
-            {
-                foundTask.DueDate = task.DueDate;
-            }
-            if (foundTask.Importance != task.Importance)
-            {
-                foundTask.Importance = task.Importance;
-            }
-            if (foundTask.Name != task.Name)
-            {
-                foundTask.Name = task.Name;
-            }
-            if (foundTask.Points != task.Points)
-            {
-                foundTask.Points = task.Points;
-            }
-            if (foundTask.UserId != task.UserId)
-            {
-                foundTask.UserId = task.UserId;
-            }
+            foundTask.Description = task.Description;
+            foundTask.DueDate = task.DueDate;
+            foundTask.Importance = task.Importance;
+            foundTask.Name = task.Name;
+            foundTask.Points = task.Points;
+            foundTask.UserId = task.UserId;
 
             foundTask.Status = task.Status;
             UnitOfWork.ProjectTasksRepository.Update(foundTask);
-            UnitOfWork.ProjectTasksRepository.Save();
+            UnitOfWork.Complete();
 
         }
 
         public void DeleteTask(ProjectTasks task)
         {
+            this.UpdateUserAchivements(task);
             UnitOfWork.ProjectTasksRepository.Delete(task);
-            UnitOfWork.ProjectTasksRepository.Save();
+            UnitOfWork.Complete();
         }
 
         public int GetNumberOfUrgentTasks(string userId)
@@ -162,16 +139,16 @@ namespace TaskManager.ApplicationLogic.Services
 
         }
 
-        public TasksViewModel GetTaskViewModel(string userId)
+        public TasksDto GetTaskViewModel(string userId)
         {
-            var model = new TasksViewModel
+            var model = new TasksDto
             {
                 ProjectTasks = UnitOfWork.ProjectTasksRepository.FindAllByUserIdOrPM(userId)
             };
             return model;
         }
 
-        public void DeleteTask(TasksViewModel model)
+        public void DeleteTask(TasksDto model)
         {
             foreach (var task in model.ProjectTasks)
             {
@@ -179,19 +156,12 @@ namespace TaskManager.ApplicationLogic.Services
                 {
                     var foundTask = UnitOfWork.ProjectTasksRepository
                         .FindByCondition(t => t.ProjectTasksId == task.ProjectTasksId);
-                    if (foundTask.UserId != null && foundTask.Status.Equals(TaskStatus.Done))
+                    if (foundTask.UserId != null && foundTask.Status.Equals(TaskStatus.Done.ToString()))
                     {
-                        var user = UnitOfWork.UsersRepository
-                            .FindByCondition(u => u.Id == foundTask.UserId);
-                        if (user != null)
-                        {
-                            user.Score -= foundTask.Points;
-                        }
-                        UnitOfWork.UsersRepository.Update(user);
-                        UnitOfWork.UsersRepository.Save();
+                        this.UpdateUserAchivements(foundTask);
                     }
                     UnitOfWork.ProjectTasksRepository.Delete(foundTask);
-                    UnitOfWork.ProjectTasksRepository.Save();
+                    UnitOfWork.Complete();
                 }
             }
         }
@@ -199,6 +169,28 @@ namespace TaskManager.ApplicationLogic.Services
         public List<ProjectTasks> FindAll(Users user)
         {
             return UnitOfWork.ProjectTasksRepository.FindAll(user);
+        }
+
+        private void UpdateUserAchivements(ProjectTasks task)
+        {
+            var user = UnitOfWork.UsersRepository
+                            .FindByCondition(u => u.Id == task.UserId);
+            if (user != null)
+            {
+                user.Score -= task.Points;
+            }
+            UnitOfWork.UsersRepository.Update(user);
+            UnitOfWork.Complete();
+
+            // search for the badges that need to be removed
+            var badges = UnitOfWork.UserBadgesRepository
+                .FindBadges(user).Where(b => b.Badge.NecessaryScore > user.Score)
+                .ToList();
+            foreach (var badge in badges)
+            {
+                UnitOfWork.UserBadgesRepository.Delete(badge);
+            }
+            UnitOfWork.Complete();
         }
     }
 }

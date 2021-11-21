@@ -25,9 +25,8 @@ namespace TaskManager.ApplicationLogic.Services
             };
 
             UnitOfWork.TeamsRepository.Create(team);
-            UnitOfWork.TeamsRepository.Save();
             UnitOfWork.UserTeamsRepository.Create(ut);
-            UnitOfWork.UserTeamsRepository.Save();
+            UnitOfWork.Complete();
         }
 
         public void DeleteTeam(Teams team)
@@ -36,7 +35,7 @@ namespace TaskManager.ApplicationLogic.Services
             if(foundTeam != null)
             {
                 UnitOfWork.TeamsRepository.Delete(foundTeam);
-                UnitOfWork.TeamsRepository.Save();
+                UnitOfWork.Complete();
             }
         }
 
@@ -50,7 +49,7 @@ namespace TaskManager.ApplicationLogic.Services
                 foundTeam.ProjectId = team.ProjectId;
 
                 UnitOfWork.TeamsRepository.Update(foundTeam);
-                UnitOfWork.TeamsRepository.Save();
+                UnitOfWork.Complete();
             }
         }
 

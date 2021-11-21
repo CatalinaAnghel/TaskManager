@@ -18,7 +18,7 @@ namespace TaskManager.ApplicationLogic.Services
         public void AddUserInTeam(UserTeams userTeam)
         {
             UnitOfWork.UserTeamsRepository.Create(userTeam);
-            UnitOfWork.UserTeamsRepository.Save();
+            UnitOfWork.Complete();
         }
 
         public void DeleteUserFromTeam(UserTeams userTeam)
@@ -30,7 +30,7 @@ namespace TaskManager.ApplicationLogic.Services
                 if(task.ProjectId == userTeam.Team.ProjectId)
                 {
                     UnitOfWork.ProjectTasksRepository.Delete(task);
-                    UnitOfWork.ProjectTasksRepository.Save();
+                    UnitOfWork.Complete();
                 }
             }
             var foundUserTeam = UnitOfWork.UserTeamsRepository
@@ -39,7 +39,7 @@ namespace TaskManager.ApplicationLogic.Services
             if(foundUserTeam != null)
             {
                 UnitOfWork.UserTeamsRepository.Delete(foundUserTeam);
-                UnitOfWork.UserTeamsRepository.Save();
+                UnitOfWork.Complete();
             }
             
         }

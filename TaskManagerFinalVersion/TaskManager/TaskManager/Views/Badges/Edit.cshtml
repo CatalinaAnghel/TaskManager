@@ -16,7 +16,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="BadgesId" class="control-label">Badge:</label>
-                <select id="selected-badge" onchange="get_badge_details()" asp-for="BadgesId" class="form-control" asp-items="ViewBag.BadgesId">
+                <select id="selected-badge" asp-for="BadgesId" class="form-control" asp-items="ViewBag.BadgesId">
                     <option selected="selected">
                         Choose a badge
                     </option>
@@ -41,5 +41,5 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/ajax.js" type="application/javascript"></script>
+    <script src="~/js/badges.js" type="application/javascript"></script>
 }
