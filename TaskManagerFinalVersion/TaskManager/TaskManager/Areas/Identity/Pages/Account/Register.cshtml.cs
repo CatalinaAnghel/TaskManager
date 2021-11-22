@@ -70,9 +70,6 @@ namespace TaskManager.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Display(Name = "Choose a profile image")]
-            //[RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.png)", ErrorMessage = "The file type must be jpg, jpeg or png")]
-            //[FileExtensions]
-            //[FileExtensions(Extensions = "jpg,jpeg,png", ErrorMessage = "The file type must be jpg, jpeg or png.")]
             public List<IFormFile> ProfileImage { get; set; }
         }
 
@@ -84,7 +81,6 @@ namespace TaskManager.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {

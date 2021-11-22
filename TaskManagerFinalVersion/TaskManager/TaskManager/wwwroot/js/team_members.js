@@ -8,9 +8,9 @@
             });
         }
     },
-    get_colleagues: function (element) {
+    get_colleagues: function (selector) {
         // get the badge's id from the form
-        var id = { id: element.val() };
+        var id = { id: selector.val() };
         // make the AJAX request
         $.ajax({
             url: "/UserTeams/FindColleagues",

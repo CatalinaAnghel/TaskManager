@@ -17,7 +17,9 @@ namespace TaskManager.DataAccess.Data
 
         public override DbSet<Users> Users { get; set; }
         public override DbSet<Roles> Roles { get; set; }
+#pragma warning disable CS0114 // Member hides inherited member; missing override keyword
         public DbSet<UserRoles> UserRoles { get; set; }
+#pragma warning restore CS0114 // Member hides inherited member; missing override keyword
         public DbSet<Projects> Projects { get; set; }
         public DbSet<ProjectTasks> ProjectTasks { get; set; }
         public DbSet<Teams> Teams { get; set; }
