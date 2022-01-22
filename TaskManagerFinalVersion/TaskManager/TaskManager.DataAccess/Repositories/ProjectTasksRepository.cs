@@ -40,7 +40,7 @@ namespace TaskManager.DataAccess.Repositories
             var urgentTasksNumber = (from task in RepositoryContext.ProjectTasks
                                      where (task.UserId.Equals(userId) &&
                                      EF.Functions.DateDiffDay(DateTime.Now, task.DueDate) < 7 &&
-                                     task.Status.Equals(TaskStatus.Done.ToString()))
+                                     task.Status.Equals(TaskStatus.Unfinished.ToString()))
                                      select task).Count();
 
             return urgentTasksNumber;

@@ -98,7 +98,7 @@ namespace TaskManager.Controllers
             _badgesService.DeleteBadge(badge);
             return RedirectToAction(nameof(Index));
         }
-
+        
         public ActionResult GetBadgeDetails(int id)
         {
             return Json(_badgesService.FindBadgesByCondition(b => b.BadgesId == id));

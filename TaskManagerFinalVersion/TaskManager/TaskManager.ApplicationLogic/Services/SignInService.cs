@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TaskManager.ApplicationLogic.Dtos;
 using TaskManager.ApplicationLogic.Services.Abstractions;
 using TaskManager.DataAccess.DataModels;
 
@@ -22,21 +23,21 @@ namespace TaskManager.ApplicationLogic.Services
             _imageService = imageService;
         }
 
-        public async Task<IdentityResult> Register(string username, string password, string email, bool emailConfirmed, string firstName, string lastName, int score, List<IFormFile> profileImage)
+        public async Task<IdentityResult> Register(RegisterDto registerDto)
         {
             var user = new Users
             {
-                UserName = username,
-                Email = email,
-                EmailConfirmed = emailConfirmed,
-                FirstName = firstName,
-                LastName = lastName,
-                Score = score
+                UserName = registerDto.Username,
+                Email = registerDto.Email,
+                EmailConfirmed = registerDto.EmailConfirmed,
+                FirstName = registerDto.FirstName,
+                LastName = registerDto.LastName,
+                Score = registerDto.Score
             };
 
-            _imageService.SetProfileImage(profileImage, user);
+            _imageService.SetProfileImage(registerDto.ProfileImage, user);
             
-            var result = await _userManager.CreateAsync(user, password);
+            var result = await _userManager.CreateAsync(user, registerDto.Password);
             
             if (result.Succeeded)
             {

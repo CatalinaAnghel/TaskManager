@@ -14,13 +14,16 @@ namespace TaskManager.Controllers
         private readonly IUsersService _usersService;
         private readonly IProjectsService _projectsService;
         private readonly ITeamsService _teamsService;
+        private readonly ILoggerManager _loggerManager;
         public TeamsController( IProjectsService projectsService,
                                 ITeamsService teamsService,
-                                IUsersService usersService)
+                                IUsersService usersService, 
+                                ILoggerManager loggerManager)
         {
             _usersService = usersService;
             _projectsService = projectsService;
             _teamsService = teamsService;
+            _loggerManager = loggerManager;
         }
 
         // GET: Teams
@@ -97,6 +100,7 @@ namespace TaskManager.Controllers
                     _teamsService.UpdateTeam(teams);
                 }
                 catch (DbUpdateConcurrencyException e){
+                    _loggerManager.LogError(e.Message);
                 }
 
                 return RedirectToAction(nameof(Index));

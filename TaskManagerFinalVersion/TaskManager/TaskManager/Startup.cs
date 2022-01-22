@@ -73,6 +73,7 @@ namespace TaskManager
             services.AddScoped<IUserTeamsService, UserTeamsService>();
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<ISessionService, SessionService>();
+            services.AddScoped<ILoggerManager, LoggerManager>();
 
             services.AddRazorPages();
             services.AddSession(options =>

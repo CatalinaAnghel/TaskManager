@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using TaskManager.ApplicationLogic.Dtos;
 using TaskManager.ApplicationLogic.Services.Abstractions;
 using TaskManager.DataAccess.DataModels;
 
@@ -84,7 +85,18 @@ namespace TaskManager.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var result = await _signInService.Register(Input.Email, Input.Password, Input.Email, true, Input.FirstName, Input.LastName, 0, Input.ProfileImage);
+                var registerDto = new RegisterDto
+                {
+                    Email = Input.Email,
+                    Password = Input.Password,
+                    Username = Input.Email,
+                    EmailConfirmed = true,
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    ProfileImage = Input.ProfileImage,
+                    Score = 0
+                };
+                var result = await _signInService.Register(registerDto);
                 
                 if (result.Succeeded)
                 {

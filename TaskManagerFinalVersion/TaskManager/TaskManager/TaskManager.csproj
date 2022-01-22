@@ -26,4 +26,9 @@
     <ProjectReference Include="..\TaskManager.ApplicationLogic\TaskManager.ApplicationLogic.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="wwwroot\logs\" />
+  </ItemGroup>
+
 </Project>
