@@ -36,24 +36,7 @@ namespace TaskManager.ApplicationLogic.Services
                     .FindByCondition(u => u.Id == task.UserId);
                 if (foundUser != null)
                 {
-                    foundUser.Score += foundTask.Points;
-                    UnitOfWork.UsersRepository.Update(foundUser);
-                    UnitOfWork.Complete();
-                    var badges = UnitOfWork.BadgesRepository.GetBadge(foundUser);
-                    if (badges.Count() > 0)
-                    {
-                        foreach(var badge in badges)
-                        {
-                            UserBadges userBadge = new UserBadges
-                            {
-                                UsersId = foundUser.Id,
-                                BadgeId = badge.BadgesId
-                            };
-                            UnitOfWork.UserBadgesRepository.Create(userBadge);
-                            UnitOfWork.Complete();
-                        }
-                    }
-
+                    AssignBadges(foundUser, foundTask);
                 }
             }
             else
@@ -77,6 +60,28 @@ namespace TaskManager.ApplicationLogic.Services
             UnitOfWork.ProjectTasksRepository.Update(foundTask);
             UnitOfWork.Complete();
 
+        }
+
+        private void AssignBadges(Users user, ProjectTasks foundTask)
+        {
+            user.Score += foundTask.Points;
+            UnitOfWork.UsersRepository.Update(user);
+            UnitOfWork.Complete();
+
+            var badges = UnitOfWork.BadgesRepository.GetBadge(user);
+            if (badges.Any())
+            {
+                foreach (var badge in badges)
+                {
+                    UserBadges userBadge = new UserBadges
+                    {
+                        UsersId = user.Id,
+                        BadgeId = badge.BadgesId
+                    };
+                    UnitOfWork.UserBadgesRepository.Create(userBadge);
+                    UnitOfWork.Complete();
+                }
+            }
         }
 
         public void DeleteTask(ProjectTasks task)
