@@ -13,7 +13,7 @@ namespace TaskManager.DataAccess.Repositories
         {
         }
 
-        public Badges GetBadge(Users user)
+        public List<Badges> GetBadge(Users user)
         {
             // get the user's badges:
             var badges = (from b in RepositoryContext.Badges
@@ -23,10 +23,9 @@ namespace TaskManager.DataAccess.Repositories
 
             // find the badge won by the user (he has the necessary score and he does not have the badge)
             var wonbadge = (from badge in RepositoryContext.Badges
-                            from u in RepositoryContext.Users
-                            where u.Score >= badge.NecessaryScore && !badges.Contains(badge.BadgesId)
+                            where user.Score >= badge.NecessaryScore && !badges.Contains(badge.BadgesId)
                             orderby badge.NecessaryScore ascending
-                            select badge).FirstOrDefault();
+                            select badge).ToList();
 
             return wonbadge;
         }

@@ -133,7 +133,6 @@ namespace TaskManager.Controllers
         public async Task<IActionResult> Create([Bind("ProjectTasksId,Name,Description,Importance,DueDate,Status,ProjectId,Points")] ProjectTasks projectTasks)
         {
             var user = await _usersService.GetCurrentUser(HttpContext.User);
-
             if (ModelState.IsValid)
             {
                 _taskService.AddTask(projectTasks);
@@ -179,7 +178,7 @@ namespace TaskManager.Controllers
         // POST: ProjectTasks/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("ProjectTasksId,Name,Description,Importance,DueDate,Status,UserId,ProjectId,Points")] ProjectTasks projectTasks)
+        public IActionResult Edit([Bind("ProjectTasksId,Name,Description,Importance,DueDate,Status,UserId,ProjectId")] ProjectTasks projectTasks)
         {
             if (ModelState.IsValid)
             {

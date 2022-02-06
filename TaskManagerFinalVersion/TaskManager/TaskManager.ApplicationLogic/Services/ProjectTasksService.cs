@@ -36,19 +36,22 @@ namespace TaskManager.ApplicationLogic.Services
                     .FindByCondition(u => u.Id == task.UserId);
                 if (foundUser != null)
                 {
-                    foundUser.Score += task.Points;
+                    foundUser.Score += foundTask.Points;
                     UnitOfWork.UsersRepository.Update(foundUser);
                     UnitOfWork.Complete();
-                    var badge = UnitOfWork.BadgesRepository.GetBadge(foundUser);
-                    if (badge != null)
+                    var badges = UnitOfWork.BadgesRepository.GetBadge(foundUser);
+                    if (badges.Count() > 0)
                     {
-                        UserBadges userBadge = new UserBadges
+                        foreach(var badge in badges)
                         {
-                            UsersId = foundUser.Id,
-                            BadgeId = badge.BadgesId
-                        };
-                        UnitOfWork.UserBadgesRepository.Create(userBadge);
-                        UnitOfWork.Complete();
+                            UserBadges userBadge = new UserBadges
+                            {
+                                UsersId = foundUser.Id,
+                                BadgeId = badge.BadgesId
+                            };
+                            UnitOfWork.UserBadgesRepository.Create(userBadge);
+                            UnitOfWork.Complete();
+                        }
                     }
 
                 }
@@ -68,7 +71,6 @@ namespace TaskManager.ApplicationLogic.Services
             foundTask.DueDate = task.DueDate;
             foundTask.Importance = task.Importance;
             foundTask.Name = task.Name;
-            foundTask.Points = task.Points;
             foundTask.UserId = task.UserId;
 
             foundTask.Status = task.Status;
