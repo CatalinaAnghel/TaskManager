@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TaskManager.DataAccess.Data;
 using TaskManager.DataAccess.DataModels;
 using TaskManager.DataAccess.Repositories.Abstractions;
@@ -26,6 +23,17 @@ namespace TaskManager.DataAccess.Repositories
                     join ut in RepositoryContext.UserTeams on u.Id equals ut.UsersId
                     where teams.Contains(ut.TeamsId)
                     select u).Distinct().ToList();
+        }
+
+        public List<Users> FindTeamMembers (int projectId)
+        {
+            var users =  (from ut in RepositoryContext.UserTeams
+                         join t in RepositoryContext.Teams on ut.TeamsId equals t.TeamsId
+                         join u in RepositoryContext.Users on ut.UsersId equals u.Id
+                         where t.ProjectId == projectId
+                         select u).Distinct().ToList();
+            return users;
+
         }
 
     }

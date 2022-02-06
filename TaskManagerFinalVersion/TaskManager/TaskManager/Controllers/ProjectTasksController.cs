@@ -49,7 +49,6 @@ namespace TaskManager.Controllers
         {
             var user = await _usersService.GetCurrentUser(HttpContext.User);
             ViewData["ProjectsId"] = new SelectList(_projectsService.FindProjectByPM(user.Id), "ProjectsId", "Name");
-            ViewData["UsersId"] = new SelectList(_usersService.FindColleagues(user), "Id", "UserName");
             return View();
         }
 
@@ -63,7 +62,6 @@ namespace TaskManager.Controllers
                 return RedirectToAction("Index", "Projects");
             }
             ViewData["ProjectsId"] = new SelectList(_projectsService.FindProjectByPM(user.Id), "ProjectsId", "Name");
-            ViewData["UsersId"] = new SelectList(_usersService.FindColleagues(user), "Id", "UserName");
             return View();
         }
 
@@ -90,6 +88,12 @@ namespace TaskManager.Controllers
         public IActionResult GetTasks(int id)
         {
             return Json(_taskService.FindAllByProject(id));
+        }
+
+        [HttpGet]
+        public IActionResult GetUsersBasedOnProject(int id)
+        {
+            return Json(_usersService.FindTeamMemebers(id));
         }
 
         // GET: ProjectTasks/Details/5
@@ -163,7 +167,6 @@ namespace TaskManager.Controllers
 
             ViewData["ProjectTasksId"] = new SelectList(projectTasks, "ProjectTasksId", "Name");
             ViewData["ProjectId"] = new SelectList(projects, "ProjectsId", "Name");
-            ViewData["UserId"] = new SelectList(_usersService.FindAll(), "Id", "UserName");
             ViewData["ImportanceLevelDropdown"] = this.BuildDropdownViewModel(
                 Enum.GetValues(typeof(ImportanceLevel))
                 );
@@ -178,7 +181,7 @@ namespace TaskManager.Controllers
         // POST: ProjectTasks/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("ProjectTasksId,Name,Description,Importance,DueDate,Status,UserId,ProjectId")] ProjectTasks projectTasks)
+        public IActionResult Edit([Bind("ProjectTasksId,Name,Description,Importance,DueDate,Status,ProjectId")] ProjectTasks projectTasks)
         {
             if (ModelState.IsValid)
             {
@@ -201,7 +204,6 @@ namespace TaskManager.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ProjectId"] = new SelectList(_projectsService.FindProjectByPM(projectTasks.UserId), "ProjectsId", "Name");
-            ViewData["UserId"] = new SelectList(_usersService.FindAll(), "Id", "UserName");
             ViewData["ImportanceLevelDropdown"] = this.BuildDropdownViewModel(
                 Enum.GetValues(typeof(ImportanceLevel))
                 );

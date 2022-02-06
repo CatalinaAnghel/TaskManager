@@ -84,5 +84,10 @@ namespace TaskManager.ApplicationLogic.Services
         {
             return UnitOfWork.UsersRepository.FindColleagues(user);
         }
+
+        public List<Users> FindTeamMemebers(int project)
+        {
+            return UnitOfWork.UsersRepository.FindTeamMembers(project);
+        }
     }
 }

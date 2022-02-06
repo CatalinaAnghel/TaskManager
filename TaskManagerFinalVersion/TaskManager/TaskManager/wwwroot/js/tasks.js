@@ -11,6 +11,7 @@
         if (selected_project.length) {
             selected_project.on("change", () => {
                 self.get_tasks();
+                self.get_team_members();
             });
         }
     },
@@ -57,6 +58,39 @@
             },
             error: function () {
                 $("#select_task").empty();
+                console.log("Something went wrong");
+            }
+        });
+    },
+    get_team_members: function () {
+        // get the project's id from the form
+        var project = { id: $("#select-project").val() };
+        // make the AJAX request
+        $.ajax({
+            url: "../ProjectTasks/GetUsersBasedOnProject",
+            type: "GET",
+            data: project,
+            success: function (data) {
+                $("#select-user").empty();
+                console.log(data);
+                var defaultUser = false;
+                console.log(data);
+                data.forEach(function (element) {
+                      $("#select-user").append('<option value="' + element.id + '">' + element.email + "</option>");
+                    if (!defaultUser) {
+                        $("#selected-user").val(element.id);
+                        console.log($("#select-user option:first"));
+                        $("#select-user option:first").attr('selected', true);
+                        defaultUser = true;
+                    }
+                });
+                $("#select-user").on("change", function (e) {
+                    $("#select-user option:selected").attr('selected', false);
+                    $("#selected-user").val($("#select-user option:selected").val());
+                });
+            },
+            error: function () {
+                $("#select-user").empty();
                 console.log("Something went wrong");
             }
         });

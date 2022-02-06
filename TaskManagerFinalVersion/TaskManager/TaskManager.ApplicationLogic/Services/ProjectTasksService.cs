@@ -30,10 +30,11 @@ namespace TaskManager.ApplicationLogic.Services
         {
             var foundTask = UnitOfWork.ProjectTasksRepository
                 .FindByCondition(t => t.ProjectTasksId == task.ProjectTasksId);
+            string userId = foundTask.UserId;
             if (task.Status.Equals(TaskStatus.Done.ToString()) && !foundTask.Status.Equals(TaskStatus.Done.ToString()))
             {
                 var foundUser = UnitOfWork.UsersRepository
-                    .FindByCondition(u => u.Id == task.UserId);
+                    .FindByCondition(u => u.Id.Equals(userId));
                 if (foundUser != null)
                 {
                     AssignBadges(foundUser, foundTask);
@@ -54,8 +55,11 @@ namespace TaskManager.ApplicationLogic.Services
             foundTask.DueDate = task.DueDate;
             foundTask.Importance = task.Importance;
             foundTask.Name = task.Name;
-            foundTask.UserId = task.UserId;
-
+            if(task.UserId != null)
+            {
+                foundTask.UserId = task.UserId;
+            }
+            
             foundTask.Status = task.Status;
             UnitOfWork.ProjectTasksRepository.Update(foundTask);
             UnitOfWork.Complete();

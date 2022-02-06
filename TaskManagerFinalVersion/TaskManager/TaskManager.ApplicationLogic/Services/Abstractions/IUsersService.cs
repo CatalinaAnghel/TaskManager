@@ -16,5 +16,6 @@ namespace TaskManager.ApplicationLogic.Services.Abstractions
         public IQueryable<Users> FindAll();
         public Users FindByCondition(Expression<Func<Users, bool>> expression);
         public List<Users> FindColleagues(Users user);
+        public List<Users> FindTeamMemebers(int project);
     }
 }

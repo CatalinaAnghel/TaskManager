@@ -9,5 +9,6 @@ namespace TaskManager.DataAccess.Repositories.Abstractions
     public interface IUsersRepository: IRepositoryBase<Users>
     {
         public List<Users> FindColleagues(Users user);
+        public List<Users> FindTeamMembers(int projectId);
     }
 }
